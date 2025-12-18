@@ -135,6 +135,7 @@ export interface ApplicationInfo {
   FirmNumber: string;
   Requestor: RequestorInfo;
   AuthorisedIndividualName: string;
+  RepOfficeFunctions: string | null; // Conditional: only when RepOffice = Yes
   Contact: ContactInfo;
   PreviousAddress: PreviousAddressInfo | null;
   OtherNames: OtherNamesInfo | null;

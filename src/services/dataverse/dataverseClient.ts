@@ -122,7 +122,7 @@ export async function getAuthorisedIndividual(id: string): Promise<any> {
       'dfsa_ai_pleaseindicatethefunctionsthecandidate',
       // Step 1.1 - Identity
       'dfsa_hasthecandidatepreviouslyheldauthorisedindiv',
-      'cr5f7_pleaseselectcandidateup',
+      // Note: cr5f7_pleaseselectcandidateup field does not exist in Dataverse - removed
       'cr5f7_areyouapplyingasanmlro',
       // Step 1.1 - Other Names
       'dfsa_hasthecandidateeverusedothernamesorchanged',
