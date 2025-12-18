@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { generatePdfHandler, getPdfStatusHandler } from '../handlers/pdfHandlers';
+import { generatePdfHandler, generateDocxHandler, getPdfStatusHandler } from '../handlers/pdfHandlers';
 import { authenticateApiKey } from '../middleware/authMiddleware';
 
 const router = Router();
@@ -25,6 +25,20 @@ router.use(authenticateApiKey);
  * }
  */
 router.post('/generate', generatePdfHandler);
+
+/**
+ * POST /api/pdf/generate-docx
+ * Generate DOCX file for an Authorised Individual application
+ * Returns DOCX file directly for download
+ *
+ * Request body:
+ * {
+ *   "recordId": "18036be5-dadb-f011-8544-6045bd69d7d8"
+ * }
+ *
+ * Response: Binary DOCX file
+ */
+router.post('/generate-docx', generateDocxHandler);
 
 /**
  * GET /api/pdf/status/:jobId
