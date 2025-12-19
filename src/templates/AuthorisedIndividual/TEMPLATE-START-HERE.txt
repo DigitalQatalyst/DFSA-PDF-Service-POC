@@ -1,0 +1,165 @@
+================================================================================
+QUICK START TEMPLATE - Copy this into Microsoft Word
+================================================================================
+
+Save as: AuthorisedIndividual_v1.0.docx
+Location: src/templates/AuthorisedIndividual/
+
+================================================================================
+AUTHORISED INDIVIDUAL APPLICATION
+================================================================================
+
+1. APPLICATION GUIDELINES
+-------------------------
+I confirm that I have carefully read and understood the guidelines: {Guidelines.ConfirmRead}
+
+2. DIFC DISCLOSURE
+------------------
+Do you consent to the disclosure of information in this application by the DFSA to the DIFCA?
+{#DIFCDisclosure.ConsentToDisclosure}Yes{/DIFCDisclosure.ConsentToDisclosure}{^DIFCDisclosure.ConsentToDisclosure}No{/DIFCDisclosure.ConsentToDisclosure}
+
+3. FIRM INFORMATION
+-------------------
+Firm Name: {Application.FirmName}
+Firm Number: {Application.FirmNumber}
+
+4. REQUESTOR INFORMATION
+-------------------------
+Name of person making the submission: {Application.Requestor.Name}
+Position / Title: {Application.Requestor.Position}
+Email address: {Application.Requestor.Email}
+Contact Telephone Number: {Application.Requestor.Phone}
+
+5. AUTHORISED INDIVIDUAL INFORMATION
+-------------------------------------
+What is the name of proposed Authorised Individual? {Application.AuthorisedIndividualName}
+
+6. APPLICANT INFORMATION
+------------------------
+Is the Candidate applying on behalf of a Representative Office?
+{#Flags.RepOffice}Yes{/Flags.RepOffice}{^Flags.RepOffice}No{/Flags.RepOffice}
+
+{#Flags.RepOffice}
+Please indicate the function(s) the Candidate is applying for within the Representative Office:
+{Application.RepOfficeFunctions}
+{/Flags.RepOffice}
+
+7. CANDIDATE IDENTITY
+---------------------
+Has the candidate previously applied or held Authorised Individual status with the DFSA?
+{#Flags.PreviouslyHeld}Yes{/Flags.PreviouslyHeld}{^Flags.PreviouslyHeld}No{/Flags.PreviouslyHeld}
+
+8. CANDIDATE PASSPORT DETAILS
+------------------------------
+{#PassportDetails}
+Title: {Title}
+Full Name (as it appears in the principal passport): {FullName}
+Date of birth: {DateOfBirth}
+Place of birth: {PlaceOfBirth}
+UAE resident: {#UaeResident}Yes{/UaeResident}{^UaeResident}No{/UaeResident}
+No. of citizenships: {NumberOfCitizenships}
+Other names: {OtherNames}
+Name in Native language: {NativeName}
+---
+{/PassportDetails}
+
+9. CANDIDATE OTHER NAMES
+------------------------
+Has the candidate ever used other names or changed names?
+{#Flags.OtherNames}Yes{/Flags.OtherNames}{^Flags.OtherNames}No{/Flags.OtherNames}
+
+{#Flags.OtherNames}
+State other names: {Application.OtherNames.StateOtherNames}
+Name in native language (if applicable): {Application.OtherNames.NativeName}
+Date name changed: {Application.OtherNames.DateChanged}
+Reason for change of name: {Application.OtherNames.Reason}
+{/Flags.OtherNames}
+
+10. CANDIDATE CITIZENSHIP
+-------------------------
+{#Citizenships}
+Country/Territory: {Country}
+Passport No.: {PassportNo}
+Expiry Date: {ExpiryDate}
+---
+{/Citizenships}
+
+11. CANDIDATE ADDRESS AND CONTACT
+---------------------------------
+Address: {Application.Contact.Address}
+Postcode / PO box: {Application.Contact.PostCode}
+Country: {Application.Contact.Country}
+Mobile telephone number: {Application.Contact.Mobile}
+Contact Email Address: {Application.Contact.Email}
+For how long has the candidate resided at the above address? {Application.Contact.ResidenceDuration}
+
+12. PREVIOUS ADDRESS
+--------------------
+{#Flags.ResidenceDurationLessThan3Years}
+Address: {Application.PreviousAddress.Address}
+Postcode / PO box: {Application.PreviousAddress.PostCode}
+Country: {Application.PreviousAddress.Country}
+{/Flags.ResidenceDurationLessThan3Years}
+
+13. LICENSED FUNCTIONS
+----------------------
+{#LicensedFunctions.ShowLicensedFunctionsSection}
+Please select the Licensed Function to be carried out by the candidate:
+{LicensedFunctions.LicensedFunctionChoiceLabel}
+
+{#LicensedFunctions.ShowMandatoryFunctionsQuestion}
+Please indicate if the candidate will also carry out any of the following mandatory Licensed Functions:
+- Senior Executive Officer: {#LicensedFunctions.SeniorExecutiveOfficer}Yes{/LicensedFunctions.SeniorExecutiveOfficer}{^LicensedFunctions.SeniorExecutiveOfficer}No{/LicensedFunctions.SeniorExecutiveOfficer}
+- Finance Officer: {#LicensedFunctions.FinanceOfficer}Yes{/LicensedFunctions.FinanceOfficer}{^LicensedFunctions.FinanceOfficer}No{/LicensedFunctions.FinanceOfficer}
+- Compliance Officer: {#LicensedFunctions.ComplianceOfficer}Yes{/LicensedFunctions.ComplianceOfficer}{^LicensedFunctions.ComplianceOfficer}No{/LicensedFunctions.ComplianceOfficer}
+- Money Laundering Reporting Officer: {#LicensedFunctions.MLRO}Yes{/LicensedFunctions.MLRO}{^LicensedFunctions.MLRO}No{/LicensedFunctions.MLRO}
+{/LicensedFunctions.ShowMandatoryFunctionsQuestion}
+
+{#LicensedFunctions.ShowResponsibleOfficerConfirmations}
+The applicant has significant responsibility for the management of one or more aspects of an Authorised Firm's affairs: {LicensedFunctions.RespResp1}
+The applicant exercises a significant influence on the firm as a result of (a); and: {LicensedFunctions.RespResp2}
+The applicant is not an Employee of the Authorised Firm: {LicensedFunctions.RespResp3}
+{/LicensedFunctions.ShowResponsibleOfficerConfirmations}
+{/LicensedFunctions.ShowLicensedFunctionsSection}
+
+14. CANDIDATE POSITION
+----------------------
+What is the candidate's proposed job title? {Position.ProposedJobTitle}
+Do you have proposed starting date? {#Flags.HasStartDate}Yes{/Flags.HasStartDate}{^Flags.HasStartDate}No{/Flags.HasStartDate}
+
+{#Flags.HasStartDate}
+What is the candidate's proposed starting date? {Position.ProposedStartDate}
+{/Flags.HasStartDate}
+
+{^Flags.HasStartDate}
+Please explain: {Position.StartDateExplanation}
+{/Flags.HasStartDate}
+
+Does the candidate hold or has previously held, in a personal capacity, any licence, registration or equivalent with any Financial Services Regulator?
+{#Flags.HasRegulatoryHistory}Yes{/Flags.HasRegulatoryHistory}{^Flags.HasRegulatoryHistory}No{/Flags.HasRegulatoryHistory}
+
+Will the candidate applying for Principal Representative also be appointed as the MLRO?
+{#Position.WillBeMLRO}Yes{/Position.WillBeMLRO}{^Position.WillBeMLRO}No{/Position.WillBeMLRO}
+
+15. REGULATORY HISTORY
+---------------------
+{#Flags.HasRegulatoryHistory}
+{#RegulatoryHistory}
+Regulator: {Regulator}
+Date Started: {DateStarted}
+Date Finished (if applicable): {DateFinished}
+Name of license / registration: {LicenseName}
+Name of license register: {RegisterName}
+Brief overview of license / registration: {Overview}
+{#IsOtherRegulator}
+Please provide details: {OtherRegulatorDetails}
+{/IsOtherRegulator}
+---
+{/RegulatoryHistory}
+{/Flags.HasRegulatoryHistory}
+
+================================================================================
+Document Generated: {GeneratedAt}
+Template Version: {TemplateVersion}
+================================================================================
+

@@ -33,14 +33,9 @@ async function testPdfGeneration() {
 
     // Step 1: Fetch test record
     console.log('Step 1: Fetching test record from Dataverse...');
-    const records = await dataverseClient.queryAuthorisedIndividuals(undefined, 1);
 
-    if (records.length === 0) {
-      console.error('❌ No records found. Please create at least one record.');
-      process.exit(1);
-    }
-
-    const testId = records[0].dfsa_authorised_individualid;
+    // Use specific test record ID with populated data
+    const testId = '18036be5-dadb-f011-8544-6045bd69d7d8';
     console.log(`✅ Found test record: ${testId}`);
     console.log('');
 

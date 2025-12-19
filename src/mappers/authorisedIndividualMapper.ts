@@ -15,6 +15,14 @@ import {
   ConditionFlags,
   DataverseAuthorisedIndividualRecord
 } from '../types/authorisedIndividual';
+import {
+  resolveGuidelinesConfirm,
+  resolveTitle,
+  resolveCitizenshipCount,
+  resolveCountry,
+  resolveRegulator,
+  resolveRepOfficeFunctions
+} from './picklistMetadata';
 
 /**
  * Build condition flags from Dataverse data
@@ -172,12 +180,12 @@ function mapPassportDetails(record: DataverseAuthorisedIndividualRecord) {
   logger.info('[Mapper] Mapping passport details', { count: passportDetails.length });
 
   return passportDetails.map((item: any) => ({
-    Title: formatChoiceLabel(item.dfsa_titlez),
+    Title: resolveTitle(item.dfsa_titlez),
     FullName: item.dfsa_nameasitappearsintheprincipalpassport || '',
     DateOfBirth: formatDate(item.cr5f7_dateofbirth1) || formatDate(item.dfsa_dateofbirth),
     PlaceOfBirth: item.dfsa_placeofbirth || '',
     UaeResident: item.dfsa_uaeresident === true,
-    NumberOfCitizenships: formatChoiceLabel(item.dfsa_no) || 'N/A',
+    NumberOfCitizenships: resolveCitizenshipCount(item.dfsa_no),
     OtherNames: item.dfsa_othernames || '',
     NativeName: item.dfsa_nameinnativelanguageifapplicable || ''
   }));
@@ -198,7 +206,7 @@ function mapCitizenships(record: DataverseAuthorisedIndividualRecord) {
   logger.info('[Mapper] Mapping citizenships', { count: citizenships.length });
 
   return citizenships.map((item: any) => ({
-    Country: formatChoiceLabel(item.dfsa_countryterritory),
+    Country: resolveCountry(item.dfsa_countryterritory),
     PassportNo: item.dfsa_passportno || '',
     ExpiryDate: formatDate(item.cr5f7_expirydate1) || formatDate(item.dfsa_expirydate)
   }));
@@ -223,7 +231,7 @@ function mapRegulatoryHistory(record: DataverseAuthorisedIndividualRecord) {
     const isOther = regulator === 356960087; // "Other" option set value
 
     return {
-      Regulator: formatChoiceLabel(regulator),
+      Regulator: resolveRegulator(regulator),
       DateStarted: formatDate(item.dfsa_datestarted),
       DateFinished: formatDate(item.dfsa_datefinishedifapplicable),
       LicenseName: item.dfsa_nameoflicenseregistration || '',
@@ -255,7 +263,7 @@ export function mapToDTO(
   const dto: AuthorisedIndividualDTO = {
     // Step 0.1: Guidelines
     Guidelines: {
-      ConfirmRead: formatChoiceLabel(record.dfsa_iconfirmthatihavecarefullyreadandup)
+      ConfirmRead: resolveGuidelinesConfirm(record.dfsa_iconfirmthatihavecarefullyreadandup)
     },
 
     // Step 0.2: DIFC Disclosure
@@ -275,10 +283,14 @@ export function mapToDTO(
         Phone: record.dfsa_contacttelephonenumber || ''
       },
       AuthorisedIndividualName: record.dfsa_proposedauthorisedindividualname || '',
+      // CONDITIONAL: Rep Office Functions (only if Rep Office = Yes)
+      RepOfficeFunctions: flags.RepOffice
+        ? resolveRepOfficeFunctions(record.dfsa_ai_pleaseindicatethefunctionsthecandidate)
+        : null,
       Contact: {
         Address: record.dfsa_address || '',
         PostCode: record.dfsa_postcodepobox || '',
-        Country: formatChoiceLabel(record.dfsa_countryauthindividual),
+        Country: resolveCountry(record.dfsa_countryauthindividual),
         Mobile: record.dfsa_mobiletelephonenumber || '',
         Email: record.dfsa_contactemailaddress || '',
         ResidenceDuration: record.cr5f7_howlonghasthecandidateresidedattheabov === 612320000
@@ -290,7 +302,7 @@ export function mapToDTO(
         ? {
             Address: record.dfsa_buildingnamenumber || '',
             PostCode: record.dfsa_postcode_pobox || '',
-            Country: formatChoiceLabel(record.dfsa_country2)
+            Country: resolveCountry(record.dfsa_country2)
           }
         : null,
       // CONDITIONAL: Other Names (only if has used other names)

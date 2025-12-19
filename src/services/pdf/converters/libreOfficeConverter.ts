@@ -35,9 +35,12 @@ export async function convertViaLibreOffice(
     // Write DOCX to temp file
     await writeFile(inputPath, docxBuffer);
 
+    // Get LibreOffice path from environment or use default
+    const libreOfficePath = process.env.LIBREOFFICE_PATH || 'soffice';
+
     // Run LibreOffice conversion
-    logger.debug('Running LibreOffice conversion', { inputPath, outputDir });
-    const command = `soffice --headless --convert-to pdf --outdir "${outputDir}" "${inputPath}"`;
+    logger.debug('Running LibreOffice conversion', { inputPath, outputDir, libreOfficePath });
+    const command = `"${libreOfficePath}" --headless --convert-to pdf --outdir "${outputDir}" "${inputPath}"`;
 
     await execAsync(command, {
       timeout: 30000, // 30 second timeout

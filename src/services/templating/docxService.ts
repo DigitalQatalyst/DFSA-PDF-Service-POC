@@ -8,6 +8,7 @@ import PizZip from 'pizzip';
 import fs from 'fs/promises';
 import path from 'path';
 import logger from '../../utils/logger';
+import angularParser from 'angular-expressions';
 
 export interface DocxGenerationRequest {
   documentType: string;
@@ -29,10 +30,23 @@ export async function generateDocx(request: DocxGenerationRequest): Promise<Buff
     // Load template into PizZip
     const zip = new PizZip(templateBuffer);
 
-    // Create docxtemplater instance
+    // Configure angular parser for nested property access
+    // This enables syntax like {Application.FirmName} and {Application.Requestor.Name}
+    const expressionParser = (tag: string) => {
+      return {
+        get: (scope: any, context: any) => {
+          const result = angularParser.compile(tag)(scope);
+          // Return empty string instead of undefined for missing values
+          return result === undefined ? '' : result;
+        }
+      };
+    };
+
+    // Create docxtemplater instance with angular parser
     const doc = new Docxtemplater(zip, {
       paragraphLoop: true,
-      linebreaks: true
+      linebreaks: true,
+      parser: expressionParser
     });
 
     // Render document with data

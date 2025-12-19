@@ -52,6 +52,19 @@ async function testDataverseConnection() {
       console.log(`   Has Citizenships: ${!!singleRecord.cr5f7_dfsa_Authorised_Individual_AI_Q13_CitizenshipInfo_dfsa_ROAF_authorised_Individual_AICIQ13}`);
       console.log(`   Has Regulatory History: ${!!singleRecord.cr5f7_dfsa_Authorised_Individual_AI_Q28_LicenceDetails_dfsa_ROAF_authorised_Individual_AICIQ28}`);
       console.log('');
+
+      // Debug: Log the actual structure of related entities
+      console.log('DEBUG: Related Entity Structures:');
+      console.log('');
+      console.log('Passport Details:');
+      console.log(JSON.stringify(singleRecord.cr5f7_AI_Q12_CandidateInfo, null, 2));
+      console.log('');
+      console.log('Citizenships:');
+      console.log(JSON.stringify(singleRecord.cr5f7_dfsa_Authorised_Individual_AI_Q13_CitizenshipInfo_dfsa_ROAF_authorised_Individual_AICIQ13, null, 2));
+      console.log('');
+      console.log('Regulatory History:');
+      console.log(JSON.stringify(singleRecord.cr5f7_dfsa_Authorised_Individual_AI_Q28_LicenceDetails_dfsa_ROAF_authorised_Individual_AICIQ28, null, 2));
+      console.log('');
     } else {
       console.log('⚠️  No records found in Dataverse');
       console.log('   Please create at least one Authorised Individual record to test with');

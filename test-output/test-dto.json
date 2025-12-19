@@ -1,0 +1,105 @@
+{
+  "Guidelines": {
+    "ConfirmRead": "I confirm"
+  },
+  "DIFCDisclosure": {
+    "ConsentToDisclosure": true
+  },
+  "Application": {
+    "Id": "18036be5-dadb-f011-8544-6045bd69d7d8",
+    "FirmName": "Gold and Silver Bros",
+    "FirmNumber": "F011050",
+    "Requestor": {
+      "Name": "John Doe",
+      "Position": "Sr, Professional Advisor",
+      "Email": "stephanie.njunge@digitalqatalyst.com",
+      "Phone": "0700702332"
+    },
+    "AuthorisedIndividualName": "Giacomo Hamilton",
+    "RepOfficeFunctions": "Principal Representative",
+    "Contact": {
+      "Address": "A officia neque ducimus laboriosam sint ullam sequi nisi veritatis magna ad dolor architecto quo aut asperiores",
+      "PostCode": "2345678",
+      "Country": "United Arab Emirates",
+      "Mobile": "+1 (867) 195-7416",
+      "Email": "jicodikemi@mailinator.com",
+      "ResidenceDuration": "Less than 3 years"
+    },
+    "PreviousAddress": {
+      "Address": "Et ipsam quo dolorem autem labore est aliquip pariatur Tempore tenetur proident autem ea ut error",
+      "PostCode": "1234567",
+      "Country": "Qatar"
+    },
+    "OtherNames": {
+      "StateOtherNames": "Oren Watkins",
+      "NativeName": "Mannix Preston",
+      "DateChanged": "2025-12-25",
+      "Reason": "Ezekiel Gates"
+    }
+  },
+  "Flags": {
+    "RepOffice": true,
+    "PreviouslyHeld": true,
+    "OtherNames": true,
+    "ResidenceDurationLessThan3Years": true,
+    "HasStartDate": true,
+    "HasRegulatoryHistory": true,
+    "LicensedFunctionSelected": false
+  },
+  "LicensedFunctions": {
+    "ShowLicensedFunctionsSection": false,
+    "ShowMandatoryFunctionsQuestion": false,
+    "LicensedFunctionChoice": "",
+    "LicensedFunctionChoiceLabel": "",
+    "SeniorExecutiveOfficer": false,
+    "FinanceOfficer": false,
+    "ComplianceOfficer": false,
+    "MLRO": false,
+    "NoMandatoryFunction": false,
+    "ShowResponsibleOfficerConfirmations": false,
+    "RespResp1": "",
+    "RespResp2": "",
+    "RespResp3": "",
+    "ExecutiveType": ""
+  },
+  "PassportDetails": [
+    {
+      "Title": "Other",
+      "FullName": "Helen Holloway",
+      "DateOfBirth": "2005-12-14",
+      "PlaceOfBirth": "Fugit officia qui ut veritatis quo",
+      "UaeResident": false,
+      "NumberOfCitizenships": "5",
+      "OtherNames": "",
+      "NativeName": "Holly Burke"
+    }
+  ],
+  "Citizenships": [
+    {
+      "Country": "United Arab Emirates",
+      "PassportNo": "Ducimus reiciendis asperiores cum ut molestiae eius qui et nulla",
+      "ExpiryDate": "2025-12-25"
+    }
+  ],
+  "RegulatoryHistory": [
+    {
+      "Regulator": "SEC (USA)",
+      "DateStarted": "2025-12-17",
+      "DateFinished": "2025-12-17",
+      "LicenseName": "",
+      "RegisterName": "Test",
+      "Overview": "Test",
+      "IsOtherRegulator": false,
+      "OtherRegulatorDetails": null
+    }
+  ],
+  "Position": {
+    "ProposedJobTitle": "Test",
+    "HasProposedStartDate": true,
+    "ProposedStartDate": "2025-12-23",
+    "StartDateExplanation": null,
+    "WillBeMLRO": true
+  },
+  "GeneratedAt": "2025-12-18T09:08:05.882Z",
+  "TemplateVersion": "1.0"
+}
