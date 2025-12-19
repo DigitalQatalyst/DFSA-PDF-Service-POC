@@ -11,16 +11,24 @@ import { validateTemplate } from '../services/templating/docxService';
 /**
  * POST /api/pdf/generate
  * Generate PDF for an Authorised Individual application
+ * Supports both Dataverse format (applicationId) and Power Pages format (user_info, form_data, metadata)
  */
 export async function generatePdfDocument(req: Request, res: Response): Promise<void> {
+  // Check if this is a Power Pages request format
+  if (req.body.user_info && req.body.form_data && req.body.metadata) {
+    // Forward to sync PDF controller
+    const { generateSyncPdf } = await import('./syncPdfController');
+    return generateSyncPdf(req, res);
+  }
+
   const { applicationId, documentType = 'AuthorisedIndividual', templateVersion = '1.0', returnBuffer = false } = req.body;
 
-  // Validate required fields
+  // Validate required fields for Dataverse format
   if (!applicationId) {
     res.status(400).json({
       success: false,
       error: 'Bad Request',
-      message: 'applicationId is required'
+      message: 'applicationId is required for Dataverse format, or provide user_info, form_data, and metadata for Power Pages format'
     });
     return;
   }

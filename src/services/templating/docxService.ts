@@ -13,7 +13,7 @@ import angularParser from 'angular-expressions';
 export interface DocxGenerationRequest {
   documentType: string;
   templateVersion: string;
-  data: Record<string, unknown>;
+  data: Record<string, unknown> | any;
 }
 
 /**

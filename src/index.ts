@@ -26,6 +26,7 @@ import {
 } from './middleware/error.middleware';
 import authorisedIndividualRoutes from './routes/authorisedIndividualRoutes';
 import pdfRoutes from './routes/pdfRoutes';
+import syncPdfRoutes from './routes/syncPdfRoutes';
 
 // Initialize Express app
 const app: Application = express();
@@ -43,18 +44,26 @@ const corsOptions = {
       return callback(null, true);
     }
 
-    // Check if origin is in allowed list
-    if (allowedOrigins.includes(origin)) {
+    // Normalize origin by removing trailing slash for comparison
+    const normalizedOrigin = origin.replace(/\/$/, '');
+    const normalizedAllowedOrigins = allowedOrigins.map(o => o.replace(/\/$/, ''));
+
+    // Check if origin is in allowed list (with or without trailing slash)
+    if (allowedOrigins.includes(origin) || normalizedAllowedOrigins.includes(normalizedOrigin)) {
+      logger.debug('[CORS] Allowed request from origin', { origin });
       callback(null, true);
     } else {
-      logger.warn('[CORS] Blocked request from unauthorized origin', { origin });
+      logger.warn('[CORS] Blocked request from unauthorized origin', { 
+        origin, 
+        allowedOrigins: allowedOrigins 
+      });
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
   maxAge: 86400, // 24 hours
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-ID']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-ID', 'X-API-Key']
 };
 
 // --- SECURITY MIDDLEWARE ---
@@ -86,6 +95,7 @@ app.get('/', (req, res) => {
       get: '/api/v1/authorised-individual/:id',
       conditionalDemo: '/api/v1/authorised-individual/:id/conditional-demo',
       pdfGenerate: '/api/pdf/generate',
+      syncPdfGenerate: '/api/pdf/generate-docx',
       validateTemplate: '/api/pdf/validate-template/:documentType/:version'
     }
   });
@@ -105,6 +115,7 @@ app.get('/health', (req, res) => {
 // --- API ROUTES ---
 app.use('/api/v1/authorised-individual', authorisedIndividualRoutes);
 app.use('/api/pdf', pdfRoutes);
+app.use('/api/pdf', syncPdfRoutes);
 
 // --- ERROR HANDLING ---
 app.use(notFoundHandler);
@@ -130,6 +141,7 @@ app.listen(PORT, () => {
   logger.info(`    GET  http://localhost:${PORT}/api/v1/authorised-individual/:id/conditional-demo`);
   logger.info('  [PDF Generation]');
   logger.info(`    POST http://localhost:${PORT}/api/pdf/generate`);
+  logger.info(`    POST http://localhost:${PORT}/api/pdf/generate-docx`);
   logger.info(`    GET  http://localhost:${PORT}/api/pdf/validate-template/:documentType/:version`);
   logger.info('='.repeat(60));
 });
