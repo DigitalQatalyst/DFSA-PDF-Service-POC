@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFSA Authorised Individual Application</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        .document-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid #B82933;
+        }
+
+        .header h1 {
+            color: #B82933;
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .header .subtitle {
+            color: #666666;
+            margin: 5px 0;
+            font-size: 13px;
+        }
+
+        .header .application-id {
+            color: #A39043;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+            border: 1px solid #E5E5E5;
+        }
+
+        .section-title {
+            background-color: #B82933;
+            color: #ffffff;
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 13px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .section-content {
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        .field-group {
+            margin-bottom: 15px;
+        }
+
+        .field-row {
+            display: flex;
+            margin-bottom: 8px;
+            align-items: flex-start;
+            padding: 6px 0;
+            border-bottom: 1px solid #F5F5F5;
+        }
+
+        .field-row:last-child {
+            border-bottom: none;
+        }
+
+        .field-label {
+            font-weight: bold;
+            min-width: 200px;
+            margin-right: 20px;
+            color: #555555;
+            font-size: 11px;
+        }
+
+        .field-value {
+            flex: 1;
+            word-wrap: break-word;
+            color: #333333;
+        }
+
+        .metadata {
+            background-color: #F8F9FA;
+            padding: 15px;
+            border: 1px solid #E5E5E5;
+            font-size: 10px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .metadata strong {
+            color: #B82933;
+            font-weight: bold;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 9px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-yes {
+            background-color: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+
+        .status-no {
+            background-color: #F8D7DA;
+            color: #721C24;
+            border: 1px solid #F5C6CB;
+        }
+
+        .conditional-section {
+            border-left: 3px solid #A39043;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #FFFBF0;
+        }
+
+        .conditional-section p {
+            margin: 0 0 10px 0;
+            font-style: italic;
+            color: #A39043;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .highlight-text {
+            color: #B82933;
+            font-weight: bold;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #E5E5E5;
+            margin: 20px 0;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>DFSA Authorised Individual Application</h1>
+            <div class="application-id">Application ID: {{application_id}}</div>
+            <div class="subtitle">Generated: {{generated_at}}</div>
+        </div>
+
+        <!-- Metadata -->
+        <div class="metadata">
+            <strong>Document Information:</strong> This PDF was generated from Dataverse data on {{generated_at}}.
+            This document contains the complete application details for DFSA Authorised Individual status.
+        </div>
+
+        <!-- Personal Information -->
+        <div class="section">
+            <div class="section-title">Personal Information</div>
+            <div class="section-content">
+                <div class="field-group">
+                    <div class="field-row">
+                        <div class="field-label">Surname:</div>
+                        <div class="field-value"><span class="highlight-text">{{surname}}</span></div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-label">Given Names:</div>
+                        <div class="field-value"><span class="highlight-text">{{given_names}}</span></div>
+                    </div>
+                    {{#if has_other_names}}
+                    <div class="field-row">
+                        <div class="field-label">Other Names:</div>
+                        <div class="field-value">{{other_names}}</div>
+                    </div>
+                    {{/if}}
+                    {{#if has_previously_held_names}}
+                    <div class="field-row">
+                        <div class="field-label">Previously Held Names:</div>
+                        <div class="field-value">{{previously_held_names}}</div>
+                    </div>
+                    {{/if}}
+                    <div class="field-row">
+                        <div class="field-label">Date of Birth:</div>
+                        <div class="field-value">{{formatDate date_of_birth}}</div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-label">Place of Birth:</div>
+                        <div class="field-value">{{place_of_birth}}</div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-label">Gender:</div>
+                        <div class="field-value">{{gender}}</div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-label">Nationality:</div>
+                        <div class="field-value">{{nationality}}</div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-label">Marital Status:</div>
+                        <div class="field-value">{{marital_status}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Contact Information -->
+        <div class="section">
+            <div class="section-title">Contact Information</div>
+            <div class="section-content">
+                <div class="field-group">
+                    <div class="field-row">
+                        <div class="field-label">Email Address:</div>
+                        <div class="field-value">{{email_address}}</div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-label">Mobile Number:</div>
+                        <div class="field-value">{{mobile_number}}</div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-label">Address Line 1:</div>
+                        <div class="field-value">{{address_line1}}</div>
+                    </div>
+                    {{#if address_line2}}
+                    <div class="field-row">
+                        <div class="field-label">Address Line 2:</div>
+                        <div class="field-value">{{address_line2}}</div>
+                    </div>
+                    {{/if}}
+                    <div class="field-row">
+                        <div class="field-label">City:</div>
+                        <div class="field-value">{{city}}</div>
+                    </div>
+                    {{#if postal_code}}
+                    <div class="field-row">
+                        <div class="field-label">Postal Code:</div>
+                        <div class="field-value">{{postal_code}}</div>
+                    </div>
+                    {{/if}}
+                    <div class="field-row">
+                        <div class="field-label">Country:</div>
+                        <div class="field-value">{{country}}</div>
+                    </div>
+                    {{#if residence_duration_years}}
+                    <div class="field-row">
+                        <div class="field-label">Residence Duration:</div>
+                        <div class="field-value">{{residence_duration_years}} years</div>
+                    </div>
+                    {{/if}}
+                </div>
+
+                {{#if residence_duration_less_than_3_years}}
+                <div class="conditional-section">
+                    <p><em>Previous address required: Current residence less than 3 years</em></p>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Application Metadata -->
+        <div class="section">
+            <div class="section-title">Application Status</div>
+            <div class="section-content">
+                <div class="field-group">
+                    <div class="field-row">
+                        <div class="field-label">Application ID:</div>
+                        <div class="field-value"><span class="highlight-text">{{application_id}}</span></div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-label">Generated At:</div>
+                        <div class="field-value">{{generated_at}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

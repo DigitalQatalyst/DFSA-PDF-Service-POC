@@ -1,0 +1,583 @@
+================================================================================
+AUTHORISED INDIVIDUAL TEMPLATE - REBUILD BLUEPRINT
+================================================================================
+Version: 2.0 (Professional Rebuild)
+Date: 2025-12-22
+Target File Size: <50KB
+Based On: Canonical Section Model (71 fields, 15 sections, 8 flags)
+
+================================================================================
+INSTRUCTIONS FOR MANUAL WORD TEMPLATE CREATION
+================================================================================
+
+1. Open Microsoft Word and create a new blank document
+2. Set up the 6 custom styles (see PHASE 1 below)
+3. Copy/paste each section below into Word
+4. Apply the specified styles to each section
+5. Replace placeholder text with the exact {placeholder} syntax shown
+6. Save as: AuthorisedIndividual_v1.0.docx
+7. Verify file size < 50KB
+
+CRITICAL RULES:
+- NO embedded images (use only text/tables)
+- NO embedded fonts (use system fonts only)
+- NO high-resolution graphics
+- Use tables for structured data only
+- Keep formatting minimal and professional
+
+================================================================================
+PHASE 1: CUSTOM WORD STYLES SETUP
+================================================================================
+
+Before building the template, create these 6 custom styles in Word:
+
+Style 1: DFSA Document Title
+  - Font: Arial, 18pt, Bold
+  - Color: RGB(0, 51, 102) - Dark Blue
+  - Spacing: 0pt before, 12pt after
+  - Alignment: Center
+  - Keep with next: Yes
+
+Style 2: DFSA Section Header
+  - Font: Arial, 14pt, Bold
+  - Color: RGB(0, 51, 102) - Dark Blue
+  - Spacing: 18pt before, 6pt after
+  - Borders: Bottom border 1pt solid RGB(0, 51, 102)
+  - Keep with next: Yes
+
+Style 3: DFSA Field Label
+  - Font: Arial, 10pt, Bold
+  - Color: RGB(51, 51, 51) - Dark Gray
+  - Spacing: 6pt before, 3pt after
+  - Keep with next: Yes
+
+Style 4: DFSA Field Value
+  - Font: Arial, 10pt, Regular
+  - Color: RGB(0, 0, 0) - Black
+  - Spacing: 0pt before, 6pt after
+  - Background: RGB(245, 245, 245) - Light Gray
+  - Padding: 3pt all sides
+
+Style 5: DFSA Table Header
+  - Font: Arial, 10pt, Bold
+  - Color: RGB(255, 255, 255) - White
+  - Background: RGB(0, 51, 102) - Dark Blue
+  - Alignment: Center
+  - Padding: 6pt all sides
+
+Style 6: DFSA Table Cell
+  - Font: Arial, 10pt, Regular
+  - Color: RGB(0, 0, 0) - Black
+  - Background: RGB(255, 255, 255) - White
+  - Padding: 6pt all sides
+  - Borders: 1pt solid RGB(204, 204, 204) - Light Gray
+
+================================================================================
+PHASE 2: DOCUMENT HEADER (Add to Word Header Section)
+================================================================================
+
+[Left-aligned]
+DFSA - Dubai Financial Services Authority
+Authorised Individual Application Form
+
+[Right-aligned]
+Generated: {GeneratedDate}
+Application ID: {Application.RecordId}
+Version: 1.0
+
+[Add horizontal line separator]
+
+================================================================================
+PHASE 3: DOCUMENT BODY - COPY THIS CONTENT TO WORD
+================================================================================
+
+Apply "DFSA Document Title" style:
+────────────────────────────────────────────────────────────────────────────
+AUTHORISED INDIVIDUAL APPLICATION FORM
+────────────────────────────────────────────────────────────────────────────
+
+
+================================================================================
+SECTION 1: APPLICATION GUIDELINES (AUTH_GUIDE)
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+Apply "DFSA Field Label" style:
+Confirmation:
+
+Apply "DFSA Field Value" style:
+{Guidelines.ConfirmRead}
+
+
+================================================================================
+SECTION 2: DIFC DISCLOSURE (AUTH_DIFC_DISCLOSURE)
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+Apply "DFSA Field Label" style:
+Do you consent to the disclosure of information?
+
+Apply "DFSA Field Value" style:
+{#DIFCDisclosure.ConsentToDisclosure}Yes{/DIFCDisclosure.ConsentToDisclosure}{^DIFCDisclosure.ConsentToDisclosure}No{/DIFCDisclosure.ConsentToDisclosure}
+
+
+================================================================================
+SECTION 3: FIRM INFORMATION (AUTH_FIRM_INFO)
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+Apply "DFSA Field Label" style:
+Firm Name:
+Apply "DFSA Field Value" style:
+{Application.FirmName}
+
+Apply "DFSA Field Label" style:
+Firm Number:
+Apply "DFSA Field Value" style:
+{Application.FirmNumber}
+
+
+================================================================================
+SECTION 4: REQUESTOR INFORMATION (AUTH_REQUESTOR_INFO)
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+Apply "DFSA Field Label" style:
+Name of Person Making the Submission:
+Apply "DFSA Field Value" style:
+{Application.Requestor.Name}
+
+Apply "DFSA Field Label" style:
+Position/Title:
+Apply "DFSA Field Value" style:
+{Application.Requestor.Position}
+
+Apply "DFSA Field Label" style:
+Email Address:
+Apply "DFSA Field Value" style:
+{Application.Requestor.Email}
+
+Apply "DFSA Field Label" style:
+Telephone Number:
+Apply "DFSA Field Value" style:
+{Application.Requestor.Phone}
+
+Apply "DFSA Field Label" style:
+Proposed Authorised Individual Name:
+Apply "DFSA Field Value" style:
+{Application.AuthorisedIndividualName}
+
+
+================================================================================
+SECTION 5: APPLICANT INFORMATION (AUTH_INFO)
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+Apply "DFSA Field Label" style:
+Title:
+Apply "DFSA Field Value" style:
+{ApplicantInfo.Title}
+
+Apply "DFSA Field Label" style:
+Full Name:
+Apply "DFSA Field Value" style:
+{ApplicantInfo.FullName}
+
+Apply "DFSA Field Label" style:
+Date of Birth:
+Apply "DFSA Field Value" style:
+{ApplicantInfo.DateOfBirth}
+
+Apply "DFSA Field Label" style:
+Place of Birth:
+Apply "DFSA Field Value" style:
+{ApplicantInfo.PlaceOfBirth}
+
+Apply "DFSA Field Label" style:
+Are you a UAE resident?
+Apply "DFSA Field Value" style:
+{#ApplicantInfo.UaeResident}Yes{/ApplicantInfo.UaeResident}{^ApplicantInfo.UaeResident}No{/ApplicantInfo.UaeResident}
+
+Apply "DFSA Field Label" style:
+Number of Citizenships:
+Apply "DFSA Field Value" style:
+{ApplicantInfo.NumberOfCitizenships}
+
+
+================================================================================
+SECTION 6: OTHER NAMES (AUTH_OTHER_NAMES) - CONDITIONAL
+Apply "DFSA Section Header" style to section title
+Only show if OtherNames flag is true
+================================================================================
+
+{#Flags.OtherNames}
+
+Apply "DFSA Field Label" style:
+Other Names Previously Used:
+Apply "DFSA Field Value" style:
+{ApplicantInfo.OtherNames}
+
+Apply "DFSA Field Label" style:
+Native Name (if different):
+Apply "DFSA Field Value" style:
+{ApplicantInfo.NativeName}
+
+{/Flags.OtherNames}
+
+
+================================================================================
+SECTION 7: CONTACT INFORMATION (AUTH_CONTACT)
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+Apply "DFSA Field Label" style:
+Current Address - Building Name/Number:
+Apply "DFSA Field Value" style:
+{ContactInfo.BuildingNameNumber}
+
+Apply "DFSA Field Label" style:
+Current Address - Street:
+Apply "DFSA Field Value" style:
+{ContactInfo.Street}
+
+Apply "DFSA Field Label" style:
+Current Address - Emirate/City:
+Apply "DFSA Field Value" style:
+{ContactInfo.EmirateCity}
+
+Apply "DFSA Field Label" style:
+Current Address - Country:
+Apply "DFSA Field Value" style:
+{ContactInfo.Country}
+
+Apply "DFSA Field Label" style:
+Residence Duration at Current Address:
+Apply "DFSA Field Value" style:
+{ContactInfo.ResidenceDuration}
+
+Apply "DFSA Field Label" style:
+Mobile Telephone Number:
+Apply "DFSA Field Value" style:
+{ContactInfo.MobileTelephone}
+
+Apply "DFSA Field Label" style:
+Email Address:
+Apply "DFSA Field Value" style:
+{ContactInfo.Email}
+
+
+================================================================================
+SECTION 7B: PREVIOUS ADDRESS (AUTH_PREV_ADDRESS) - CONDITIONAL
+Apply "DFSA Section Header" style to section title
+Only show if ResidenceDurationLessThan3Years flag is true
+================================================================================
+
+{#Flags.ResidenceDurationLessThan3Years}
+
+Apply "DFSA Field Label" style:
+Previous Address - Building Name/Number:
+Apply "DFSA Field Value" style:
+{ContactInfo.PrevBuildingNameNumber}
+
+Apply "DFSA Field Label" style:
+Previous Address - Street:
+Apply "DFSA Field Value" style:
+{ContactInfo.PrevStreet}
+
+Apply "DFSA Field Label" style:
+Previous Address - Emirate/City:
+Apply "DFSA Field Value" style:
+{ContactInfo.PrevEmirateCity}
+
+Apply "DFSA Field Label" style:
+Previous Address - Country:
+Apply "DFSA Field Value" style:
+{ContactInfo.PrevCountry}
+
+{/Flags.ResidenceDurationLessThan3Years}
+
+
+================================================================================
+SECTION 8: CANDIDATE PASSPORT DETAILS (AUTH_PASSPORT) - REPEATING SECTION
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+[CREATE A TABLE WITH 2 COLUMNS]
+Apply "DFSA Table Header" style to header row
+Apply "DFSA Table Cell" style to data cells
+
+{#PassportDetails}
+
+┌──────────────────────────────────┬─────────────────────────────────────────┐
+│ Field                            │ Value                                   │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Title                            │ {Title}                                 │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Full Name                        │ {FullName}                              │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Date of Birth                    │ {DateOfBirth}                           │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Place of Birth                   │ {PlaceOfBirth}                          │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ UAE Resident                     │ {#UaeResident}Yes{/UaeResident}{^UaeResident}No{/UaeResident} │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Number of Citizenships           │ {NumberOfCitizenships}                  │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Other Names                      │ {OtherNames}                            │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Native Name                      │ {NativeName}                            │
+└──────────────────────────────────┴─────────────────────────────────────────┘
+
+{/PassportDetails}
+
+
+================================================================================
+SECTION 9: CITIZENSHIP DETAILS (AUTH_CITIZENSHIP) - REPEATING SECTION
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+[CREATE A TABLE WITH 2 COLUMNS]
+Apply "DFSA Table Header" style to header row
+Apply "DFSA Table Cell" style to data cells
+
+{#Citizenships}
+
+┌──────────────────────────────────┬─────────────────────────────────────────┐
+│ Field                            │ Value                                   │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Country of Citizenship           │ {Country}                               │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Passport Number                  │ {PassportNo}                            │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Passport Expiry Date             │ {ExpiryDate}                            │
+└──────────────────────────────────┴─────────────────────────────────────────┘
+
+{/Citizenships}
+
+
+================================================================================
+SECTION 10: LICENSED FUNCTION (AUTH_LIC_FUNC) - CONDITIONAL
+Apply "DFSA Section Header" style to section title
+Only show if RepOffice flag is FALSE
+================================================================================
+
+{^Flags.RepOffice}
+
+Apply "DFSA Field Label" style:
+Licensed Function(s) to be Performed:
+Apply "DFSA Field Value" style:
+{LicensedFunction.Functions}
+
+Apply "DFSA Field Label" style:
+Brief Description of Function:
+Apply "DFSA Field Value" style:
+{LicensedFunction.Description}
+
+{/Flags.RepOffice}
+
+
+================================================================================
+SECTION 11: EMPLOYMENT DETAILS (AUTH_EMPLOYMENT)
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+Apply "DFSA Field Label" style:
+Position/Title:
+Apply "DFSA Field Value" style:
+{Employment.Position}
+
+Apply "DFSA Field Label" style:
+Start Date (or Proposed Start Date):
+Apply "DFSA Field Value" style:
+{Employment.StartDate}
+
+Apply "DFSA Field Label" style:
+Business/Role Description:
+Apply "DFSA Field Value" style:
+{Employment.RoleDescription}
+
+Apply "DFSA Field Label" style:
+DIFC/DFSA Office Location:
+Apply "DFSA Field Value" style:
+{Employment.OfficeLocation}
+
+Apply "DFSA Field Label" style:
+Is this a Senior Executive position?
+Apply "DFSA Field Value" style:
+{#Employment.IsSeniorExecutive}Yes{/Employment.IsSeniorExecutive}{^Employment.IsSeniorExecutive}No{/Employment.IsSeniorExecutive}
+
+
+================================================================================
+SECTION 12: QUALIFICATIONS (AUTH_QUALIFICATIONS)
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+Apply "DFSA Field Label" style:
+Professional Qualifications:
+Apply "DFSA Field Value" style:
+{Qualifications.Professional}
+
+Apply "DFSA Field Label" style:
+Academic Qualifications:
+Apply "DFSA Field Value" style:
+{Qualifications.Academic}
+
+Apply "DFSA Field Label" style:
+Relevant Training and Certifications:
+Apply "DFSA Field Value" style:
+{Qualifications.Training}
+
+
+================================================================================
+SECTION 13: EMPLOYMENT HISTORY (AUTH_EMP_HISTORY)
+Apply "DFSA Section Header" style to section title
+================================================================================
+
+Apply "DFSA Field Label" style:
+Employment History (Last 10 Years):
+Apply "DFSA Field Value" style:
+{EmploymentHistory.LastTenYears}
+
+Apply "DFSA Field Label" style:
+Gaps in Employment (if any):
+Apply "DFSA Field Value" style:
+{EmploymentHistory.Gaps}
+
+
+================================================================================
+SECTION 14: PREVIOUSLY HELD AI (AUTH_PREV_AI) - CONDITIONAL
+Apply "DFSA Section Header" style to section title
+Only show if PreviouslyHeld flag is true
+================================================================================
+
+{#Flags.PreviouslyHeld}
+
+Apply "DFSA Field Label" style:
+Previous Authorised Individual Details:
+Apply "DFSA Field Value" style:
+{PreviouslyHeld.Details}
+
+Apply "DFSA Field Label" style:
+Previous AI Firm Name:
+Apply "DFSA Field Value" style:
+{PreviouslyHeld.FirmName}
+
+Apply "DFSA Field Label" style:
+Previous AI Date Range:
+Apply "DFSA Field Value" style:
+{PreviouslyHeld.DateRange}
+
+{/Flags.PreviouslyHeld}
+
+
+================================================================================
+SECTION 15: REGULATORY HISTORY (AUTH_REG_HISTORY) - CONDITIONAL + REPEATING
+Apply "DFSA Section Header" style to section title
+Only show if HasRegulatoryHistory flag is true
+================================================================================
+
+{#Flags.HasRegulatoryHistory}
+
+[CREATE A TABLE WITH 2 COLUMNS]
+Apply "DFSA Table Header" style to header row
+Apply "DFSA Table Cell" style to data cells
+
+{#RegulatoryHistory}
+
+┌──────────────────────────────────┬─────────────────────────────────────────┐
+│ Field                            │ Value                                   │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Regulator Name                   │ {Regulator}                             │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Date Started                     │ {DateStarted}                           │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Date Finished                    │ {DateFinished}                          │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ License Name                     │ {LicenseName}                           │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Register Name                    │ {RegisterName}                          │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Overview                         │ {Overview}                              │
+├──────────────────────────────────┼─────────────────────────────────────────┤
+│ Other Regulator Details          │ {#IsOtherRegulator}{OtherRegulatorDetails}{/IsOtherRegulator} │
+└──────────────────────────────────┴─────────────────────────────────────────┘
+
+{/RegulatoryHistory}
+
+{/Flags.HasRegulatoryHistory}
+
+
+================================================================================
+PHASE 4: DOCUMENT FOOTER (Add to Word Footer Section)
+================================================================================
+
+[Left-aligned]
+DFSA Authorised Individual Application
+
+[Center-aligned]
+Page {PAGE} of {NUMPAGES}
+
+[Right-aligned]
+Confidential - For Official Use Only
+
+================================================================================
+VERIFICATION CHECKLIST
+================================================================================
+
+After creating the template in Word, verify:
+
+□ File size < 50KB (check in File Explorer)
+□ All 71 field placeholders present (use Find to search for { and })
+□ All 8 condition flags implemented correctly
+  □ {#Flags.RepOffice} ... {/Flags.RepOffice}
+  □ {^Flags.RepOffice} ... {/^Flags.RepOffice}
+  □ {#Flags.PreviouslyHeld} ... {/Flags.PreviouslyHeld}
+  □ {#Flags.OtherNames} ... {/Flags.OtherNames}
+  □ {#Flags.ResidenceDurationLessThan3Years} ... {/Flags.ResidenceDurationLessThan3Years}
+  □ {#Flags.HasStartDate} ... {/Flags.HasStartDate}
+  □ {#Flags.HasRegulatoryHistory} ... {/Flags.HasRegulatoryHistory}
+  □ {#Flags.LicensedFunctionSelected} ... {/Flags.LicensedFunctionSelected}
+□ All 3 repeating sections structured correctly
+  □ {#PassportDetails} ... {/PassportDetails}
+  □ {#Citizenships} ... {/Citizenships}
+  □ {#RegulatoryHistory} ... {/RegulatoryHistory}
+□ No embedded images
+□ No embedded fonts
+□ All 6 custom styles applied consistently
+□ Header and footer present
+□ Professional appearance maintained
+
+================================================================================
+SAVE INSTRUCTIONS
+================================================================================
+
+1. File → Save As
+2. Format: Word Document (.docx)
+3. Location: src/templates/AuthorisedIndividual/
+4. Filename: AuthorisedIndividual_v1.0.docx (overwrite existing)
+5. Before saving:
+   - File → Options → Save → UNCHECK "Embed fonts in the file"
+   - Review → No Track Changes enabled
+6. Save
+
+================================================================================
+TESTING INSTRUCTIONS
+================================================================================
+
+After saving the new template:
+
+1. Check file size:
+   ls -lh src/templates/AuthorisedIndividual/AuthorisedIndividual_v1.0.docx
+   Expected: 15-50 KB
+
+2. Test PDF generation:
+   POST http://localhost:3002/api/pdf/download
+   Body: { "recordId": "your-test-record-id" }
+
+3. Verify all sections render correctly in generated PDF
+
+4. Check generation time (should be 16-20 seconds, not 28 seconds)
+
+================================================================================
+END OF BLUEPRINT
+================================================================================

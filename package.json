@@ -39,8 +39,11 @@
     "docxtemplater": "^3.42.0",
     "dotenv": "^16.3.1",
     "express": "^4.22.1",
+    "handlebars": "^4.7.8",
     "helmet": "^7.1.0",
     "pizzip": "^3.1.4",
+    "puppeteer": "^24.15.0",
+    "resend": "^4.8.0",
     "uuid": "^13.0.0",
     "winston": "^3.11.0"
   },

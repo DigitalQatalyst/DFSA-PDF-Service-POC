@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { generatePdfHandler, generateDocxHandler, downloadPdfHandler, getPdfStatusHandler } from '../handlers/pdfHandlers';
+import { generatePdfHandler, generateDocxHandler, downloadPdfHandler, getPdfStatusHandler, generateAndEmailPdfHandler, testEmailHandler } from '../handlers/pdfHandlers';
 import { authenticateApiKey } from '../middleware/authMiddleware';
 
 const router = Router();
@@ -60,5 +60,47 @@ router.post('/generate-docx', generateDocxHandler);
  * }
  */
 router.get('/status/:jobId', getPdfStatusHandler);
+
+/**
+ * POST /api/pdf/generate-and-email
+ * PLAN A INTEGRATION: Generate PDF with beautiful styling and email to applicant
+ * Combines Plan C's real data pipeline with Plan A's Puppeteer styling and Resend email
+ *
+ * Request body:
+ * {
+ *   "recordId": "18036be5-dadb-f011-8544-6045bd69d7d8"
+ * }
+ *
+ * Response:
+ * {
+ *   "success": true,
+ *   "message": "PDF generated and emailed successfully",
+ *   "recipientEmail": "applicant@example.com",
+ *   "applicantName": "John Doe",
+ *   "recordId": "18036be5-dadb-f011-8544-6045bd69d7d8",
+ *   "generatedAt": "2025-12-22T10:30:00.000Z"
+ * }
+ */
+router.post('/generate-and-email', generateAndEmailPdfHandler);
+
+/**
+ * POST /api/pdf/test-email
+ * TEST ENDPOINT: Send test email to verify Resend configuration
+ * Useful for debugging email delivery issues
+ *
+ * Request body:
+ * {
+ *   "testEmail": "test@example.com"
+ * }
+ *
+ * Response:
+ * {
+ *   "success": true,
+ *   "message": "Test email sent successfully",
+ *   "recipientEmail": "test@example.com",
+ *   "note": "Check your inbox (and spam folder) for the test email with PDF attachment"
+ * }
+ */
+router.post('/test-email', testEmailHandler);
 
 export default router;

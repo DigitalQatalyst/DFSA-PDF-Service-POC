@@ -15,6 +15,63 @@ export interface ConditionFlags {
   HasStartDate: boolean;                     // Has proposed starting date?
   HasRegulatoryHistory: boolean;             // Holds/held license with regulator?
   LicensedFunctionSelected: boolean;         // Has selected a licensed function?
+  HasCareerHistory: boolean;                 // NEW: Step 2.1 - Has career history entries?
+}
+
+/**
+ * Career History Entry (repeating section - Step 2.1)
+ * Entity: dfsa_roaf_authorised_individual_chccq30
+ */
+export interface CareerHistoryEntry {
+  // Required Fields
+  Activity: string;                     // dfsa_activity (Choice)
+  ActivityLabel: string;                // Display label for activity
+  NameOfEstablishment: string;          // dfsa_nameofestablishment
+  DateFrom: string;                     // dfsa_datefrom (DD-MM-YYYY)
+  DateTo: string | null;                // dfsa_dateto (blank if current)
+  PositionTitle: string;                // dfsa_positiontitle
+  ReasonForLeaving: string;             // dfsa_reasonforleaving (Choice)
+  ReasonForLeavingLabel: string;        // Display label for reason
+
+  // Conditional Fields (shown based on Activity)
+  ExplainActivity: string | null;       // dfsa_pleaseexplainactivity (if Activity = Other)
+  ExplainReasonForLeaving: string | null; // dfsa_pleaseexplainreasonforleaving (if Reason = Other)
+  ActivitiesUndertaken: string | null;  // dfsa_activitiesundertakenbyemployer
+
+  // Address Fields (conditional)
+  Address: string | null;               // dfsa_buildingnamenumber
+  StreetName: string | null;            // dfsa_streetname
+  District: string | null;              // dfsa_district
+  City: string | null;                  // dfsa_city
+  PostcodePoBox: string | null;         // dfsa_postcodepobox
+  TelephoneNumber: string | null;       // dfsa_telephonenumber
+
+  // Contact Person Fields (conditional)
+  ContactPerson: string | null;         // dfsa_contactpersonwithinemployer
+  ContactPosition: string | null;       // dfsa_positiontitleofcontactperson
+  ContactTelephone: string | null;      // dfsa_contacttelephonenumber
+  ContactEmail: string | null;          // dfsa_contactemailaddress
+
+  // Regulatory Information (conditional)
+  IsRegulated: boolean;                 // dfsa_iswasregulated
+  Regulator: string | null;             // dfsa_pleaseselect (Choice)
+  RegulatorLabel: string | null;        // Display label for regulator
+  RegulatorDetails: string | null;      // dfsa_pleaseprovidedetailsoftheregulator (if Regulator = Other)
+
+  // Activity Details
+  ActivityDetails: string | null;       // dfsa_pleaseprovidedetailsofyouractivitieswithn
+}
+
+/**
+ * Candidate Profile (Step 2.1)
+ */
+export interface CandidateProfile {
+  CVFileId: string | null;              // dfsa_pleaseuploadthecandidatescurriculumvitae (File)
+  CVFileName: string | null;
+  CVFileUrl: string | null;
+  JobDescriptionFileId: string | null;  // dfsa_pleaseuploadthecandidatesjobdescription (File)
+  JobDescriptionFileName: string | null;
+  JobDescriptionFileUrl: string | null;
 }
 
 /**
@@ -173,6 +230,10 @@ export interface AuthorisedIndividualDTO {
   // Step 1.1 - Position
   Position: PositionInfo;
 
+  // Step 2.1 - Career History
+  CareerHistory: CareerHistoryEntry[];
+  CandidateProfile: CandidateProfile;
+
   // Metadata
   GeneratedAt: string;
   TemplateVersion: string;
@@ -206,6 +267,11 @@ export interface DataverseAuthorisedIndividualRecord {
   cr5f7_AI_Q12_CandidateInfo?: any[];
   cr5f7_dfsa_Authorised_Individual_AI_Q13_CitizenshipInfo_dfsa_ROAF_authorised_Individual_AICIQ13?: any[];
   cr5f7_dfsa_Authorised_Individual_AI_Q28_LicenceDetails_dfsa_ROAF_authorised_Individual_AICIQ28?: any[];
+  // Step 2.1 - Career History subgrid
+  dfsa_Authorised_Individual_ROAF_Authorised_Individual_CHCCQ30_dfsa_ROAF_Authorised_Individual_?: any[];
+  // Step 2.1 - File uploads
+  dfsa_pleaseuploadthecandidatescurriculumvitae?: string; // File ID
+  dfsa_pleaseuploadthecandidatesjobdescription?: string;  // File ID
   // ... many more fields
   [key: string]: any;
 }
