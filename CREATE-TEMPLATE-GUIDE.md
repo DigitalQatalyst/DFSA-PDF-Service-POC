@@ -407,4 +407,3 @@ Based on your canonical model, here are the exact field paths:
 - Review `src/mappers/authorisedIndividualMapper.ts` for field mappings
 - See docxtemplater documentation: https://docxtemplater.com/
 - Run `npm run test:pdf` to see detailed error messages
-

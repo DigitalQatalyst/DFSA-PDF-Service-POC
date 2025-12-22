@@ -106,6 +106,10 @@ app.get('/health', (req, res) => {
 app.use('/api/v1/authorised-individual', authorisedIndividualRoutes);
 app.use('/api/pdf', pdfRoutes);
 
+// Register API routes (includes /download endpoint)
+import apiPdfRoutes from './api/routes/pdfRoutes';
+app.use('/api/pdf', apiPdfRoutes);
+
 // --- ERROR HANDLING ---
 app.use(notFoundHandler);
 app.use(errorHandler);

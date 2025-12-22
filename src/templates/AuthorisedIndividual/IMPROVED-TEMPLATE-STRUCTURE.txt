@@ -1,0 +1,282 @@
+================================================================================
+IMPROVED TEMPLATE STRUCTURE - Copy to Word and Format
+================================================================================
+
+This is the improved structure with proper hierarchy and formatting.
+Apply Word styles as described in PDF-DESIGN-GUIDE.md
+
+================================================================================
+[APPLY STYLE: DFSA Document Title - Arial 18pt Bold, Center, 24pt after]
+AUTHORISED INDIVIDUAL APPLICATION
+================================================================================
+
+[APPLY STYLE: DFSA Section Header - Arial 14pt Bold, Bottom Border, 18pt before]
+1. APPLICATION GUIDELINES
+================================================================================
+
+I confirm that I have carefully read and understood the guidelines:
+
+    {Guidelines.ConfirmRead}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+2. DIFC DISCLOSURE
+================================================================================
+
+Do you consent to the disclosure of information in this application by the DFSA to the DIFCA?
+
+    {#DIFCDisclosure.ConsentToDisclosure}Yes{/DIFCDisclosure.ConsentToDisclosure}
+    {^DIFCDisclosure.ConsentToDisclosure}No{/DIFCDisclosure.ConsentToDisclosure}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+3. FIRM INFORMATION
+================================================================================
+
+[INSERT TABLE: 2 columns, 2 rows, no borders or light gray borders]
+[LEFT COLUMN - Apply DFSA Field Label style]
+Firm Name:
+Firm Number:
+
+[RIGHT COLUMN - Apply DFSA Field Value style]
+{Application.FirmName}
+{Application.FirmNumber}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+4. REQUESTOR INFORMATION
+================================================================================
+
+[INSERT TABLE: 2 columns, 4 rows, no borders]
+[LEFT COLUMN - Apply DFSA Field Label style]
+Name of person making the submission:
+Position / Title:
+Email address:
+Contact Telephone Number:
+
+[RIGHT COLUMN - Apply DFSA Field Value style]
+{Application.Requestor.Name}
+{Application.Requestor.Position}
+{Application.Requestor.Email}
+{Application.Requestor.Phone}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+5. AUTHORISED INDIVIDUAL INFORMATION
+================================================================================
+
+What is the name of proposed Authorised Individual?
+
+    {Application.AuthorisedIndividualName}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+6. APPLICANT INFORMATION
+================================================================================
+
+Is the Candidate applying on behalf of a Representative Office?
+
+    {#Flags.RepOffice}Yes{/Flags.RepOffice}
+    {^Flags.RepOffice}No{/Flags.RepOffice}
+
+{#Flags.RepOffice}
+[INSERT BOX: Light gray background #f8f9fa, border #e0e0e0, 12pt padding]
+Please indicate the function(s) the Candidate is applying for within the Representative Office:
+
+    {Application.RepOfficeFunctions}
+[/BOX]
+{/Flags.RepOffice}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+7. CANDIDATE IDENTITY
+================================================================================
+
+Has the candidate previously applied or held Authorised Individual status with the DFSA?
+
+    {#Flags.PreviouslyHeld}Yes{/Flags.PreviouslyHeld}
+    {^Flags.PreviouslyHeld}No{/Flags.PreviouslyHeld}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+8. CANDIDATE PASSPORT DETAILS
+================================================================================
+
+{#PassportDetails}
+[INSERT TABLE: 5 columns, header row + data rows]
+[TABLE HEADER ROW - Apply DFSA Table Header style: Arial 10pt Bold, White text, Dark background #2c3e50]
+Title | Full Name | Date of Birth | Place of Birth | UAE Resident
+
+[DATA ROWS - Apply DFSA Table Cell style: Times New Roman 9pt, Alternating row colors]
+{Title} | {FullName} | {DateOfBirth} | {PlaceOfBirth} | {#UaeResident}Yes{/UaeResident}{^UaeResident}No{/UaeResident}
+
+[ADDITIONAL FIELDS BELOW TABLE - Indented]
+    Number of citizenships: {NumberOfCitizenships}
+    Other names: {OtherNames}
+    Name in Native language: {NativeName}
+{/PassportDetails}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+9. CANDIDATE OTHER NAMES
+================================================================================
+
+Has the candidate ever used other names or changed names?
+
+    {#Flags.OtherNames}Yes{/Flags.OtherNames}
+    {^Flags.OtherNames}No{/Flags.OtherNames}
+
+{#Flags.OtherNames}
+[INSERT BOX: Light gray background, border, padding]
+State other names: {Application.OtherNames.StateOtherNames}
+Name in native language (if applicable): {Application.OtherNames.NativeName}
+Date name changed: {Application.OtherNames.DateChanged}
+Reason for change of name: {Application.OtherNames.Reason}
+[/BOX]
+{/Flags.OtherNames}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+10. CANDIDATE CITIZENSHIP
+================================================================================
+
+{#Citizenships}
+[INSERT TABLE: 3 columns, header + data rows]
+[TABLE HEADER ROW - Dark background, white text]
+Country/Territory | Passport No. | Expiry Date
+
+[DATA ROWS - Alternating colors]
+{Country} | {PassportNo} | {ExpiryDate}
+{/Citizenships}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+11. CANDIDATE ADDRESS AND CONTACT
+================================================================================
+
+[INSERT TABLE: 2 columns, 6 rows]
+[LEFT COLUMN - Field Labels]
+Address:
+Postcode / PO box:
+Country:
+Mobile telephone number:
+Contact Email Address:
+Residence Duration:
+
+[RIGHT COLUMN - Field Values]
+{Application.Contact.Address}
+{Application.Contact.PostCode}
+{Application.Contact.Country}
+{Application.Contact.Mobile}
+{Application.Contact.Email}
+{Application.Contact.ResidenceDuration}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+12. PREVIOUS ADDRESS
+================================================================================
+
+{#Flags.ResidenceDurationLessThan3Years}
+[INSERT BOX: Light gray background, border, padding]
+Address: {Application.PreviousAddress.Address}
+Postcode / PO box: {Application.PreviousAddress.PostCode}
+Country: {Application.PreviousAddress.Country}
+[/BOX]
+{/Flags.ResidenceDurationLessThan3Years}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+13. LICENSED FUNCTIONS
+================================================================================
+
+{#LicensedFunctions.ShowLicensedFunctionsSection}
+Please select the Licensed Function to be carried out by the candidate:
+
+    {LicensedFunctions.LicensedFunctionChoiceLabel}
+
+{#LicensedFunctions.ShowMandatoryFunctionsQuestion}
+[INSERT TABLE: 2 columns for Yes/No questions]
+Please indicate if the candidate will also carry out any of the following mandatory Licensed Functions:
+
+    Senior Executive Officer: {#LicensedFunctions.SeniorExecutiveOfficer}Yes{/LicensedFunctions.SeniorExecutiveOfficer}{^LicensedFunctions.SeniorExecutiveOfficer}No{/LicensedFunctions.SeniorExecutiveOfficer}
+    Finance Officer: {#LicensedFunctions.FinanceOfficer}Yes{/LicensedFunctions.FinanceOfficer}{^LicensedFunctions.FinanceOfficer}No{/LicensedFunctions.FinanceOfficer}
+    Compliance Officer: {#LicensedFunctions.ComplianceOfficer}Yes{/LicensedFunctions.ComplianceOfficer}{^LicensedFunctions.ComplianceOfficer}No{/LicensedFunctions.ComplianceOfficer}
+    Money Laundering Reporting Officer: {#LicensedFunctions.MLRO}Yes{/LicensedFunctions.MLRO}{^LicensedFunctions.MLRO}No{/LicensedFunctions.MLRO}
+{/LicensedFunctions.ShowMandatoryFunctionsQuestion}
+
+{#LicensedFunctions.ShowResponsibleOfficerConfirmations}
+[INSERT BOX: Light background for confirmations]
+The applicant has significant responsibility for the management of one or more aspects of an Authorised Firm's affairs:
+    {LicensedFunctions.RespResp1}
+
+The applicant exercises a significant influence on the firm as a result of (a); and:
+    {LicensedFunctions.RespResp2}
+
+The applicant is not an Employee of the Authorised Firm:
+    {LicensedFunctions.RespResp3}
+[/BOX]
+{/LicensedFunctions.ShowResponsibleOfficerConfirmations}
+{/LicensedFunctions.ShowLicensedFunctionsSection}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+14. CANDIDATE POSITION
+================================================================================
+
+What is the candidate's proposed job title?
+
+    {Position.ProposedJobTitle}
+
+Do you have proposed starting date?
+
+    {#Flags.HasStartDate}Yes{/Flags.HasStartDate}
+    {^Flags.HasStartDate}No{/Flags.HasStartDate}
+
+{#Flags.HasStartDate}
+What is the candidate's proposed starting date?
+
+    {Position.ProposedStartDate}
+{/Flags.HasStartDate}
+
+{^Flags.HasStartDate}
+Please explain:
+
+    {Position.StartDateExplanation}
+{/Flags.HasStartDate}
+
+Does the candidate hold or has previously held, in a personal capacity, any licence, registration or equivalent with any Financial Services Regulator?
+
+    {#Flags.HasRegulatoryHistory}Yes{/Flags.HasRegulatoryHistory}
+    {^Flags.HasRegulatoryHistory}No{/Flags.HasRegulatoryHistory}
+
+Will the candidate applying for Principal Representative also be appointed as the MLRO?
+
+    {#Position.WillBeMLRO}Yes{/Position.WillBeMLRO}
+    {^Position.WillBeMLRO}No{/Position.WillBeMLRO}
+
+================================================================================
+[APPLY STYLE: DFSA Section Header]
+15. REGULATORY HISTORY
+================================================================================
+
+{#Flags.HasRegulatoryHistory}
+{#RegulatoryHistory}
+[INSERT TABLE: 4 columns, header + data rows]
+[TABLE HEADER ROW - Dark background]
+Regulator | Date Started | Date Finished | License / Registration Details
+
+[DATA ROWS]
+{Regulator} | {DateStarted} | {DateFinished} | {LicenseName}
+            |               |                 | Register: {RegisterName}
+            |               |                 | Overview: {Overview}
+{#IsOtherRegulator}
+            |               |                 | Other Details: {OtherRegulatorDetails}
+{/IsOtherRegulator}
+{/RegulatoryHistory}
+{/Flags.HasRegulatoryHistory}
+
+================================================================================
+[FOOTER AREA - Apply Arial 8pt, #666666, top border]
+Template Version: {TemplateVersion}  |  Generated: {GeneratedAt}
+================================================================================
+

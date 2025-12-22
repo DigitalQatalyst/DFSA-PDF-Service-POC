@@ -1,15 +1,20 @@
 import { Router } from 'express';
-import { generatePdfHandler, generateDocxHandler, getPdfStatusHandler } from '../handlers/pdfHandlers';
+import { generatePdfHandler, generateDocxHandler, downloadPdfHandler, getPdfStatusHandler } from '../handlers/pdfHandlers';
 import { authenticateApiKey } from '../middleware/authMiddleware';
 
 const router = Router();
 
-// All routes require API key authentication
+// Most routes require API key authentication
+// But /download is public (called from Power Pages frontend)
+router.post('/download', downloadPdfHandler);
+
+// All other routes require API key authentication
 router.use(authenticateApiKey);
 
 /**
  * POST /api/pdf/generate
- * Generate PDF for an Authorised Individual application
+ * OLD FLOW: Generate PDF and upload to blob storage, then return URL
+ * User waits for: Dataverse + DOCX + PDF + Blob Upload (~21s)
  *
  * Request body:
  * {
@@ -25,6 +30,8 @@ router.use(authenticateApiKey);
  * }
  */
 router.post('/generate', generatePdfHandler);
+
+// /download route is registered above (before auth middleware)
 
 /**
  * POST /api/pdf/generate-docx
