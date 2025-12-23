@@ -29,9 +29,11 @@
   "author": "DFSA Team",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.540.0",
     "@azure/identity": "^4.0.0",
     "@azure/storage-blob": "^12.17.0",
     "@microsoft/microsoft-graph-client": "^3.0.7",
+    "@sendgrid/mail": "^8.1.0",
     "angular-expressions": "^1.5.1",
     "axios": "^1.6.2",
     "compression": "^1.7.4",
@@ -42,8 +44,7 @@
     "handlebars": "^4.7.8",
     "helmet": "^7.1.0",
     "pizzip": "^3.1.4",
-    "puppeteer": "^24.15.0",
-    "resend": "^4.8.0",
+    "playwright": "^1.41.0",
     "uuid": "^13.0.0",
     "winston": "^3.11.0"
   },
