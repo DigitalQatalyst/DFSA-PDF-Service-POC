@@ -270,5 +270,10 @@ export class PDFServicePlanA {
     handlebars.registerHelper('defaultValue', (value: any, defaultVal: string) => {
       return value || defaultVal;
     });
+
+    // Add helper (for incrementing array indices in templates)
+    handlebars.registerHelper('add', (a: number, b: number) => {
+      return a + b;
+    });
   }
 }

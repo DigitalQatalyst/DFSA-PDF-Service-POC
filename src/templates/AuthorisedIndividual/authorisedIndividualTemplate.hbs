@@ -917,6 +917,607 @@
     </div>
     {{/if}}
 
+    <!-- ============================================ -->
+    <!-- STEP 2.1: CAREER HISTORY                    -->
+    <!-- ============================================ -->
+
+    {{#if Flags.HasCareerHistory}}
+    <div class="section">
+      <div class="section-header">
+        STEP 2.1: CAREER HISTORY
+      </div>
+      <div class="section-content">
+        <p style="margin-bottom: 20px; color: var(--dfsa-text-secondary);">
+          Please provide details of the candidate's career history for the last 10 years. The employment history should account for the entire period and explain any gaps.
+        </p>
+
+        {{#each CareerHistory}}
+          <div class="repeating-item">
+            <div class="repeating-item-header">Career Entry {{add @index 1}}</div>
+
+            <!-- Activity -->
+            <div class="field-group">
+              <span class="field-label">Activity:</span>
+              <div class="field-value">
+                {{defaultValue ActivityLabel "-"}}
+              </div>
+            </div>
+
+            {{#if ExplainActivity}}
+            <div class="conditional-section">
+              <div class="field-group">
+                <span class="field-label">Please explain activity:</span>
+                <div class="field-value">
+                  {{defaultValue ExplainActivity "-"}}
+                </div>
+              </div>
+            </div>
+            {{/if}}
+
+            <!-- Name of Establishment and Position -->
+            <div class="field-grid">
+              <div class="field-group">
+                <span class="field-label">Name of establishment:</span>
+                <div class="field-value">
+                  {{defaultValue NameOfEstablishment "-"}}
+                </div>
+              </div>
+              <div class="field-group">
+                <span class="field-label">Position title:</span>
+                <div class="field-value">
+                  {{defaultValue PositionTitle "-"}}
+                </div>
+              </div>
+            </div>
+
+            <!-- Date Range -->
+            <div class="field-grid">
+              <div class="field-group">
+                <span class="field-label">Date from:</span>
+                <div class="field-value">
+                  {{formatDate DateFrom}}
+                </div>
+              </div>
+              <div class="field-group">
+                <span class="field-label">Date to:</span>
+                <div class="field-value">
+                  {{#if DateTo}}
+                    {{formatDate DateTo}}
+                  {{else}}
+                    <em>Current position</em>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+
+            <!-- Reason for Leaving -->
+            <div class="field-group">
+              <span class="field-label">Reason for leaving:</span>
+              <div class="field-value">
+                {{defaultValue ReasonForLeavingLabel "-"}}
+              </div>
+            </div>
+
+            {{#if ExplainReasonForLeaving}}
+            <div class="conditional-section">
+              <div class="field-group">
+                <span class="field-label">Please explain reason for leaving:</span>
+                <div class="field-value">
+                  {{defaultValue ExplainReasonForLeaving "-"}}
+                </div>
+              </div>
+            </div>
+            {{/if}}
+
+            <!-- Activities Undertaken -->
+            {{#if ActivitiesUndertaken}}
+            <div class="field-group">
+              <span class="field-label">Activities undertaken by employer:</span>
+              <div class="field-value">
+                {{defaultValue ActivitiesUndertaken "-"}}
+              </div>
+            </div>
+            {{/if}}
+
+            <!-- Address Information -->
+            {{#if Address}}
+            <div class="subsection">
+              <h4 class="subsection-title">Address</h4>
+
+              <div class="field-group">
+                <span class="field-label">Building name / number:</span>
+                <div class="field-value">
+                  {{defaultValue Address "-"}}
+                </div>
+              </div>
+
+              <div class="field-grid">
+                <div class="field-group">
+                  <span class="field-label">Street name:</span>
+                  <div class="field-value">
+                    {{defaultValue StreetName "-"}}
+                  </div>
+                </div>
+                <div class="field-group">
+                  <span class="field-label">District:</span>
+                  <div class="field-value">
+                    {{defaultValue District "-"}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="field-grid">
+                <div class="field-group">
+                  <span class="field-label">City:</span>
+                  <div class="field-value">
+                    {{defaultValue City "-"}}
+                  </div>
+                </div>
+                <div class="field-group">
+                  <span class="field-label">Postcode / PO Box:</span>
+                  <div class="field-value">
+                    {{defaultValue PostcodePoBox "-"}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <span class="field-label">Telephone number:</span>
+                <div class="field-value">
+                  {{defaultValue TelephoneNumber "-"}}
+                </div>
+              </div>
+            </div>
+            {{/if}}
+
+            <!-- Contact Person -->
+            {{#if ContactPerson}}
+            <div class="subsection">
+              <h4 class="subsection-title">Contact Person</h4>
+
+              <div class="field-grid">
+                <div class="field-group">
+                  <span class="field-label">Name:</span>
+                  <div class="field-value">
+                    {{defaultValue ContactPerson "-"}}
+                  </div>
+                </div>
+                <div class="field-group">
+                  <span class="field-label">Position title:</span>
+                  <div class="field-value">
+                    {{defaultValue ContactPosition "-"}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="field-grid">
+                <div class="field-group">
+                  <span class="field-label">Telephone:</span>
+                  <div class="field-value">
+                    {{defaultValue ContactTelephone "-"}}
+                  </div>
+                </div>
+                <div class="field-group">
+                  <span class="field-label">Email:</span>
+                  <div class="field-value">
+                    {{defaultValue ContactEmail "-"}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{/if}}
+
+            <!-- Regulatory Information -->
+            {{#if IsRegulated}}
+            <div class="subsection">
+              <h4 class="subsection-title">Regulatory Information</h4>
+
+              <div class="field-group">
+                <span class="field-label">Was this position regulated?</span>
+                <div class="field-value">
+                  Yes
+                </div>
+              </div>
+
+              <div class="field-group">
+                <span class="field-label">Regulator:</span>
+                <div class="field-value">
+                  {{defaultValue RegulatorLabel "-"}}
+                </div>
+              </div>
+
+              {{#if RegulatorDetails}}
+              <div class="conditional-section">
+                <div class="field-group">
+                  <span class="field-label">Please provide details of the regulator:</span>
+                  <div class="field-value">
+                    {{defaultValue RegulatorDetails "-"}}
+                  </div>
+                </div>
+              </div>
+              {{/if}}
+            </div>
+            {{/if}}
+
+            <!-- Activity Details -->
+            {{#if ActivityDetails}}
+            <div class="field-group">
+              <span class="field-label">Please provide details of your activities:</span>
+              <div class="field-value">
+                {{defaultValue ActivityDetails "-"}}
+              </div>
+            </div>
+            {{/if}}
+
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Candidate Profile (CV and Job Description) -->
+    <div class="section">
+      <div class="section-header">
+        CANDIDATE PROFILE
+      </div>
+      <div class="section-content">
+        <div class="field-group">
+          <span class="field-label">Curriculum Vitae (CV):</span>
+          <div class="field-value">
+            {{#if CandidateProfile.CVFileId}}
+              <strong>File ID:</strong> {{CandidateProfile.CVFileId}}<br>
+              <strong>File Name:</strong> {{CandidateProfile.CVFileName}}
+              {{#if CandidateProfile.CVFileUrl}}
+                <br><strong>Download:</strong> <a href="{{CandidateProfile.CVFileUrl}}">{{CandidateProfile.CVFileUrl}}</a>
+              {{/if}}
+            {{else}}
+              <em>No CV uploaded</em>
+            {{/if}}
+          </div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">Job Description:</span>
+          <div class="field-value">
+            {{#if CandidateProfile.JobDescriptionFileId}}
+              <strong>File ID:</strong> {{CandidateProfile.JobDescriptionFileId}}<br>
+              <strong>File Name:</strong> {{CandidateProfile.JobDescriptionFileName}}
+              {{#if CandidateProfile.JobDescriptionFileUrl}}
+                <br><strong>Download:</strong> <a href="{{CandidateProfile.JobDescriptionFileUrl}}">{{CandidateProfile.JobDescriptionFileUrl}}</a>
+              {{/if}}
+            {{else}}
+              <em>No job description uploaded</em>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- STEP 2.2: QUALIFICATIONS & EXPERIENCE       -->
+    <!-- ============================================ -->
+
+    <!-- Higher Education -->
+    {{#if Flags.HasHigherEducation}}
+    <div class="section">
+      <div class="section-header">
+        STEP 2.2: HIGHER EDUCATION
+      </div>
+      <div class="section-content">
+        {{#each HigherEducation}}
+          <div class="repeating-item">
+            <div class="repeating-item-header">Higher Education Award {{add @index 1}}</div>
+
+            <div class="field-group">
+              <span class="field-label">Title of qualification:</span>
+              <div class="field-value">
+                {{defaultValue TitleOfQualification "-"}}
+              </div>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label">Full name of University:</span>
+              <div class="field-value">
+                {{defaultValue UniversityName "-"}}
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field-group">
+                <span class="field-label">Date of Award:</span>
+                <div class="field-value">
+                  {{formatDate DateOfAward}}
+                </div>
+              </div>
+              <div class="field-group">
+                <span class="field-label">General classification:</span>
+                <div class="field-value">
+                  {{defaultValue ClassificationLabel "-"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Professional Qualifications -->
+    {{#if Flags.HasProfessionalQualifications}}
+    <div class="section">
+      <div class="section-header">
+        PROFESSIONAL QUALIFICATIONS
+      </div>
+      <div class="section-content">
+        {{#each ProfessionalQualifications}}
+          <div class="repeating-item">
+            <div class="repeating-item-header">Professional Qualification {{add @index 1}}</div>
+
+            <div class="field-group">
+              <span class="field-label">Full name of qualification:</span>
+              <div class="field-value">
+                {{defaultValue QualificationName "-"}}
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field-group">
+                <span class="field-label">Full name of Institute:</span>
+                <div class="field-value">
+                  {{defaultValue InstituteName "-"}}
+                </div>
+              </div>
+              <div class="field-group">
+                <span class="field-label">Date of Award:</span>
+                <div class="field-value">
+                  {{formatDate DateOfAward}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Other Qualifications -->
+    {{#if Flags.HasOtherQualifications}}
+    <div class="section">
+      <div class="section-header">
+        OTHER RELEVANT QUALIFICATIONS
+      </div>
+      <div class="section-content">
+        {{#each OtherQualifications}}
+          <div class="repeating-item">
+            <div class="repeating-item-header">Other Qualification {{add @index 1}}</div>
+
+            <div class="field-group">
+              <span class="field-label">Full name of qualification:</span>
+              <div class="field-value">
+                {{defaultValue QualificationName "-"}}
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field-group">
+                <span class="field-label">Full name of Institute:</span>
+                <div class="field-value">
+                  {{defaultValue InstituteName "-"}}
+                </div>
+              </div>
+              <div class="field-group">
+                <span class="field-label">Date of Award:</span>
+                <div class="field-value">
+                  {{formatDate DateOfAward}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Professional Memberships -->
+    {{#if Flags.HasProfessionalMemberships}}
+    <div class="section">
+      <div class="section-header">
+        CURRENT PROFESSIONAL MEMBERSHIPS
+      </div>
+      <div class="section-content">
+        {{#each ProfessionalMemberships}}
+          <div class="repeating-item">
+            <div class="repeating-item-header">Professional Membership {{add @index 1}}</div>
+
+            <div class="field-grid">
+              <div class="field-group">
+                <span class="field-label">Full name of organisation:</span>
+                <div class="field-value">
+                  {{defaultValue OrganisationName "-"}}
+                </div>
+              </div>
+              <div class="field-group">
+                <span class="field-label">Date of admission/membership:</span>
+                <div class="field-value">
+                  {{formatDate DateOfAdmission}}
+                </div>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label">Brief explanation of organisation:</span>
+              <div class="field-value">
+                {{defaultValue OrganisationExplanation "-"}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Work Experience -->
+    <div class="section">
+      <div class="section-header">
+        WORK EXPERIENCE
+      </div>
+      <div class="section-content">
+        <!-- DIFC Experience -->
+        <div class="subsection">
+          <h4 class="subsection-title">DIFC Experience</h4>
+
+          <div class="field-group">
+            <span class="field-label">Has the candidate previously worked in the DIFC?</span>
+            <div class="field-value">
+              {{formatBoolean WorkExperience.HasDIFCExperience}}
+            </div>
+          </div>
+
+          {{#if WorkExperience.HasDIFCExperience}}
+          <div class="field-group">
+            <span class="field-label">Please provide an overview of DIFC experience:</span>
+            <div class="field-value">
+              {{defaultValue WorkExperience.DIFCExperienceOverview "-"}}
+            </div>
+          </div>
+          {{else}}
+          <div class="field-group">
+            <span class="field-label">Please explain how the candidate will obtain relevant DIFC knowledge:</span>
+            <div class="field-value">
+              {{defaultValue WorkExperience.DIFCKnowledgePlan "-"}}
+            </div>
+          </div>
+          {{/if}}
+        </div>
+
+        <!-- Similar Role Experience -->
+        <div class="subsection">
+          <h4 class="subsection-title">Similar Role Experience</h4>
+
+          <div class="field-group">
+            <span class="field-label">Has the candidate previously worked in a similar role?</span>
+            <div class="field-value">
+              {{formatBoolean WorkExperience.HasSimilarRoleExperience}}
+            </div>
+          </div>
+
+          {{#if WorkExperience.HasSimilarRoleExperience}}
+          <div class="field-group">
+            <span class="field-label">How many years' experience does the candidate have?</span>
+            <div class="field-value">
+              {{defaultValue WorkExperience.YearsOfExperienceLabel "-"}}
+            </div>
+          </div>
+          {{else}}
+          <div class="field-group">
+            <span class="field-label">How will the candidate obtain the relevant experience required?</span>
+            <div class="field-value">
+              {{defaultValue WorkExperience.ExperiencePlan "-"}}
+            </div>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2.3: OTHER HOLDINGS - POSITIONS OF CONTROLLER, DIRECTOR OR PARTNER -->
+    {{#if Flags.HasOtherHoldings}}
+    <div class="section">
+      <div class="section-header">STEP 2.3: OTHER HOLDINGS - POSITIONS OF CONTROLLER, DIRECTOR OR PARTNER</div>
+      <div class="section-content">
+        <p class="section-note">
+          Please provide details of all positions as Controller, Director or Partner held by the candidate in the past 10 years.
+        </p>
+
+        {{#each OtherHoldings}}
+        <div class="repeating-item">
+          <div class="repeating-item-header">Position {{add @index 1}}</div>
+
+          <!-- Required Fields -->
+          <div class="field-group">
+            <span class="field-label">Name of Entity:</span>
+            <div class="field-value">{{defaultValue NameOfEntity "-"}}</div>
+          </div>
+
+          <div class="field-group">
+            <span class="field-label">Details of Position:</span>
+            <div class="field-value">{{defaultValue DetailsOfPosition "-"}}</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group" style="flex: 1;">
+              <span class="field-label">From:</span>
+              <div class="field-value">{{defaultValue DateFrom "-"}}</div>
+            </div>
+            <div class="field-group" style="flex: 1;">
+              <span class="field-label">To (leave blank if current):</span>
+              <div class="field-value">{{defaultValue DateTo "Current Position"}}</div>
+            </div>
+          </div>
+
+          <!-- Optional Fields -->
+          {{#if Address}}
+          <div class="field-group">
+            <span class="field-label">Address:</span>
+            <div class="field-value">{{Address}}</div>
+          </div>
+          {{/if}}
+
+          {{#if NatureOfBusiness}}
+          <div class="field-group">
+            <span class="field-label">Nature of Business:</span>
+            <div class="field-value">{{NatureOfBusiness}}</div>
+          </div>
+          {{/if}}
+
+          {{#if OwnershipText}}
+          <div class="field-group">
+            <span class="field-label">Ownership (if applicable):</span>
+            <div class="field-value">
+              {{OwnershipText}}
+              {{#if OwnershipPercentage}}
+                <span style="margin-left: 10px; font-weight: bold;">({{OwnershipPercentage}}%)</span>
+              {{/if}}
+            </div>
+          </div>
+          {{/if}}
+
+          <!-- Conditional: Regulated -->
+          <div class="field-group">
+            <span class="field-label">Is/Was the entity regulated?</span>
+            <div class="field-value">{{formatBoolean IsRegulated}}</div>
+          </div>
+
+          {{#if IsRegulated}}
+          <div class="conditional-section">
+            <div class="field-group">
+              <span class="field-label">Regulator:</span>
+              <div class="field-value">{{defaultValue RegulatorLabel "-"}}</div>
+            </div>
+          </div>
+          {{/if}}
+
+          <!-- Conditional: Conflict of Interest -->
+          <div class="field-group">
+            <span class="field-label">Any potential conflict of interest?</span>
+            <div class="field-value">{{formatBoolean HasConflictOfInterest}}</div>
+          </div>
+
+          {{#if HasConflictOfInterest}}
+          <div class="conditional-section">
+            <div class="field-group">
+              <span class="field-label">Please clarify the potential conflict of interest:</span>
+              <div class="field-value multiline-value">{{defaultValue PotentialConflictClarification "-"}}</div>
+            </div>
+          </div>
+          {{/if}}
+
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
     <!-- Document Footer -->
     <div class="document-footer">
       <p><strong>Document Generated:</strong> {{GeneratedAt}}</p>

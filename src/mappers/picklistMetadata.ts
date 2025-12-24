@@ -188,3 +188,77 @@ export const resolveExecutiveType = (value: number | null | undefined) =>
 
 export const resolveRepOfficeFunctions = (value: number | null | undefined) =>
   resolvePicklist(value, REP_OFFICE_FUNCTIONS);
+
+/**
+ * Step 2.1: Career History Activity Options
+ * Field: dfsa_activity
+ */
+export const ACTIVITY_OPTIONS: Record<number, string> = {
+  356960000: 'Employment',
+  356960001: 'Self-Employment',
+  356960002: 'Education',
+  356960003: 'Vocational Training',
+  356960004: 'Unemployed',
+  356960005: 'Other'
+};
+
+/**
+ * Step 2.1: Reason for Leaving Options
+ * Field: dfsa_reasonforleaving
+ */
+export const REASON_FOR_LEAVING_OPTIONS: Record<number, string> = {
+  356960000: 'Contract ended',
+  356960001: 'Resigned',
+  356960002: 'Dismissed',
+  356960003: 'Made redundant',
+  356960004: 'Retirement',
+  356960005: 'Other'
+};
+
+/**
+ * Step 2.1: Career History Regulator Options
+ * Field: dfsa_pleaseselect (in career history context)
+ * Note: These are the same regulator options as in Regulatory History
+ */
+export const CAREER_HISTORY_REGULATOR_OPTIONS: Record<number, string> = REGULATOR_OPTIONS;
+
+/**
+ * Convenience resolvers for Career History fields
+ */
+export const resolveActivity = (value: number | null | undefined) =>
+  resolvePicklist(value, ACTIVITY_OPTIONS);
+
+export const resolveReasonForLeaving = (value: number | null | undefined) =>
+  resolvePicklist(value, REASON_FOR_LEAVING_OPTIONS);
+
+export const resolveCareerHistoryRegulator = (value: number | null | undefined) =>
+  resolvePicklist(value, CAREER_HISTORY_REGULATOR_OPTIONS);
+
+/**
+ * Step 2.2: Higher Education Classification Options
+ * Field: dfsa_generalclassificationofqualification
+ * Note: Only one value confirmed - additional options TBD
+ */
+export const QUALIFICATION_CLASSIFICATION_OPTIONS: Record<number, string> = {
+  356960000: 'Certificate3!',
+  // Additional options TBD - will be added when picklist is complete
+};
+
+/**
+ * Step 2.2: Years of Experience Options
+ * Field: dfsa_howmanyyearsexperiencedoesthecandidatehave
+ * Note: 5 options - values TBD
+ */
+export const YEARS_OF_EXPERIENCE_OPTIONS: Record<number, string> = {
+  // TBD - awaiting picklist values
+  // Placeholder structure for when values are provided
+};
+
+/**
+ * Convenience resolvers for Step 2.2 fields
+ */
+export const resolveQualificationClassification = (value: number | null | undefined) =>
+  resolvePicklist(value, QUALIFICATION_CLASSIFICATION_OPTIONS, 'Not Specified');
+
+export const resolveYearsOfExperience = (value: number | null | undefined) =>
+  resolvePicklist(value, YEARS_OF_EXPERIENCE_OPTIONS, 'Not Specified');

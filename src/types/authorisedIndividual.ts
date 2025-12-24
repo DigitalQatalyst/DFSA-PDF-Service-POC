@@ -15,7 +15,14 @@ export interface ConditionFlags {
   HasStartDate: boolean;                     // Has proposed starting date?
   HasRegulatoryHistory: boolean;             // Holds/held license with regulator?
   LicensedFunctionSelected: boolean;         // Has selected a licensed function?
-  HasCareerHistory: boolean;                 // NEW: Step 2.1 - Has career history entries?
+  HasCareerHistory: boolean;                 // Step 2.1 - Has career history entries?
+  HasHigherEducation: boolean;               // Step 2.2 - Has higher educational awards?
+  HasProfessionalQualifications: boolean;    // Step 2.2 - Has professional qualifications?
+  HasOtherQualifications: boolean;           // Step 2.2 - Has other relevant qualifications?
+  HasProfessionalMemberships: boolean;       // Step 2.2 - Has current professional memberships?
+  HasDIFCExperience: boolean;                // Step 2.2 - Has worked in DIFC?
+  HasSimilarRoleExperience: boolean;         // Step 2.2 - Has worked in similar role?
+  HasOtherHoldings: boolean;                 // Step 2.3 - Has other holdings/positions?
 }
 
 /**
@@ -72,6 +79,89 @@ export interface CandidateProfile {
   JobDescriptionFileId: string | null;  // dfsa_pleaseuploadthecandidatesjobdescription (File)
   JobDescriptionFileName: string | null;
   JobDescriptionFileUrl: string | null;
+}
+
+/**
+ * Higher Education Entry (Step 2.2)
+ * Entity: dfsa_authorised_individual_aiciq
+ */
+export interface HigherEducationEntry {
+  TitleOfQualification: string;         // dfsa_titleofqualification
+  UniversityName: string;               // dfsa_fullnameofuniversity
+  DateOfAward: string;                  // dfsa_dateofaward (DD-MM-YYYY)
+  Classification: string;               // dfsa_generalclassificationofqualification (Choice)
+  ClassificationLabel: string;          // Display label for classification
+}
+
+/**
+ * Professional Qualification Entry (Step 2.2)
+ * Entity: dfsa_authorised_individual_aiciq96
+ */
+export interface ProfessionalQualificationEntry {
+  QualificationName: string;            // dfsa_fullnameofqualification
+  InstituteName: string;                // dfsa_fullnameofinstitute
+  DateOfAward: string;                  // dfsa_dateofaward (DD-MM-YYYY)
+}
+
+/**
+ * Other Qualification Entry (Step 2.2)
+ * Entity: dfsa_authorised_individual_aiciq99
+ */
+export interface OtherQualificationEntry {
+  QualificationName: string;            // dfsa_fullnameofqualification
+  InstituteName: string;                // dfsa_fullnameofinstitute
+  DateOfAward: string;                  // dfsa_dateofaward (DD-MM-YYYY)
+}
+
+/**
+ * Professional Membership Entry (Step 2.2)
+ * Entity: dfsa_authorised_individual_aiciq102
+ */
+export interface ProfessionalMembershipEntry {
+  OrganisationName: string;             // dfsa_fullnameoforganisation
+  DateOfAdmission: string;              // dfsa_dateofadmissionmembership (DD-MM-YYYY)
+  OrganisationExplanation: string;      // dfsa_briefexplanationoforganisation
+}
+
+/**
+ * Work Experience Information (Step 2.2)
+ */
+export interface WorkExperienceInfo {
+  HasDIFCExperience: boolean;           // dfsa_hasthecandidatepreviouslyworkedinthedifc
+  DIFCExperienceOverview: string | null; // dfsa_pleaseprovideanoverviewofdifcexperience (if Yes)
+  DIFCKnowledgePlan: string | null;     // dfsa_pleaseexplainhowthecandidatewillobtainrelev (if No)
+
+  HasSimilarRoleExperience: boolean;    // dfsa_hasthecandidatepreviouslyworkedinasimilarr
+  YearsOfExperience: string | null;     // dfsa_howmanyyearsexperiencedoesthecandidatehave (Choice, if Yes)
+  YearsOfExperienceLabel: string | null; // Display label for years
+  ExperiencePlan: string | null;        // dfsa_howwillthecandidateobtaintherelevantexperie (if No)
+}
+
+/**
+ * Other Holdings Entry (Step 2.3)
+ * Entity: dfsa_roaf_authorised_individual_opohq117
+ * Purpose: Positions of Controller, Director or Partner
+ */
+export interface OtherHoldingEntry {
+  // Required Fields
+  NameOfEntity: string;                 // dfsa_nameofentity (max 850)
+  DetailsOfPosition: string;            // dfsa_detailsofposition (max 100)
+  DateFrom: string;                     // dfsa_from (DD-MM-YYYY)
+  DateTo: string | null;                // dfsa_toleaveblankifcurrent (blank if current)
+
+  // Optional Fields
+  Address: string | null;               // dfsa_address (max 100)
+  NatureOfBusiness: string | null;      // dfsa_natureofbusiness (max 100)
+  OwnershipText: string | null;         // dfsa_ownershipifapplicable (max 100)
+  OwnershipPercentage: number | null;   // dfsa_auth_ind_ownershipifapplicable (whole number)
+
+  // Conditional Fields (internal flags)
+  IsRegulated: boolean;                 // dfsa_regulated
+  Regulator: string | null;             // dfsa_regulator (Choice, required if IsRegulated = true)
+  RegulatorLabel: string | null;        // Display label for regulator
+
+  HasConflictOfInterest: boolean;       // dfsa_anypotentialconflictofinterest
+  PotentialConflictClarification: string | null; // dfsa_potentialconflictclarification (max 4000, required if HasConflictOfInterest = true)
 }
 
 /**
@@ -233,6 +323,16 @@ export interface AuthorisedIndividualDTO {
   // Step 2.1 - Career History
   CareerHistory: CareerHistoryEntry[];
   CandidateProfile: CandidateProfile;
+
+  // Step 2.2 - Qualifications & Experience
+  HigherEducation: HigherEducationEntry[];
+  ProfessionalQualifications: ProfessionalQualificationEntry[];
+  OtherQualifications: OtherQualificationEntry[];
+  ProfessionalMemberships: ProfessionalMembershipEntry[];
+  WorkExperience: WorkExperienceInfo;
+
+  // Step 2.3 - Other Holdings
+  OtherHoldings: OtherHoldingEntry[];
 
   // Metadata
   GeneratedAt: string;

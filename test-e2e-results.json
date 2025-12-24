@@ -1,0 +1,75 @@
+{
+  "timestamp": "2025-12-24T11:13:29.502Z",
+  "recordId": "18036be5-dadb-f011-8544-6045bd69d7d8",
+  "validations": {
+    "step01": {
+      "passed": true,
+      "message": "Guidelines confirmed",
+      "data": {
+        "confirmRead": "I confirm"
+      }
+    },
+    "step02": {
+      "passed": true,
+      "message": "DIFC disclosure consent given",
+      "data": {
+        "consent": true
+      }
+    },
+    "step03": {
+      "passed": true,
+      "message": "Application info complete",
+      "data": {
+        "firmName": "Gold and Silver Bros",
+        "candidateName": "Giacomo Hamilton",
+        "requestorEmail": "stephanie.njunge@digitalqatalyst.com"
+      }
+    },
+    "step11": {
+      "passed": true,
+      "message": "Personal details validated",
+      "data": {
+        "hasRegulatoryHistory": true,
+        "regulatoryHistoryCount": 0,
+        "isRepOffice": true
+      }
+    },
+    "step21": {
+      "passed": true,
+      "message": "Career history validated",
+      "data": {
+        "careerHistoryCount": 0,
+        "hasCVFile": true,
+        "hasJobDescription": true
+      }
+    },
+    "step22": {
+      "passed": true,
+      "message": "Qualifications validated",
+      "data": {
+        "higherEducationCount": 0,
+        "professionalQualificationsCount": 0,
+        "hasDIFCExperience": false,
+        "hasSimilarRoleExperience": false
+      }
+    },
+    "step23": {
+      "passed": true,
+      "message": "Other holdings validated",
+      "data": {
+        "hasOtherHoldings": false,
+        "otherHoldingsCount": 0
+      }
+    }
+  },
+  "pdfGeneration": {
+    "success": false,
+    "error": "Error"
+  },
+  "emailSending": {
+    "success": false
+  },
+  "dataverseUpdate": {
+    "success": false
+  }
+}
