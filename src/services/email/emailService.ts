@@ -1,50 +1,89 @@
 /**
  * Email Service Orchestrator (Recommended Architecture)
  *
- * MIGRATION NOTE: Resend → SendGrid + Amazon SES fallback
- * - WHY CHANGED: Enterprise compliance (GDPR, HIPAA, SOC 2), 99.95% SLA, dedicated IPs
- * - WHAT PRESERVED: EmailPayload interface, email template HTML, PDF attachment handling
- * - NEW FEATURE: Automatic fallback to Amazon SES if SendGrid fails
+ * DEMO MODE: Using Resend as primary provider
+ * - FOR DEMO: Resend is perfect for quick demos with modern API
+ * - PRODUCTION: Use SendGrid (primary) + Amazon SES (fallback)
  *
- * Production benefits:
- * ✅ Provider abstraction (easy to swap providers)
- * ✅ Fallback resilience (SendGrid → SES if primary fails)
+ * Provider abstraction benefits:
+ * ✅ Easy to swap providers (Resend ↔ SendGrid ↔ SES)
+ * ✅ Fallback resilience for production
  * ✅ No vendor lock-in
- * ✅ Regulatory compliance ready
- * ✅ Enterprise support contracts available
+ * ✅ Same interface regardless of provider
  */
 
-import type { IEmailProvider, EmailPayload } from './IEmailProvider.js';
-import { SendGridProvider } from './providers/SendGridProvider.js';
-import { AmazonSESProvider } from './providers/AmazonSESProvider.js';
+import type { IEmailProvider, EmailPayload } from './IEmailProvider';
+import { ResendProvider } from './providers/ResendProvider';
+import { SendGridProvider } from './providers/SendGridProvider';
+import { AmazonSESProvider } from './providers/AmazonSESProvider';
 
-export { EmailPayload } from './IEmailProvider.js'; // Re-export for backward compatibility
+export { EmailPayload } from './IEmailProvider'; // Re-export for backward compatibility
 
 export class EmailService {
   private primaryProvider: IEmailProvider;
   private fallbackProvider?: IEmailProvider;
 
   constructor() {
-    // Initialize primary provider (SendGrid)
-    try {
-      this.primaryProvider = new SendGridProvider();
-      console.log(`📧 Email Service initialized with primary provider: ${this.primaryProvider.name}`);
-    } catch (error) {
-      console.error('❌ Failed to initialize primary email provider (SendGrid):', error);
-      throw new Error('Email service initialization failed: SendGrid not configured');
+    // Try to initialize providers in priority order: Resend → SendGrid → SES
+    let primaryInitialized = false;
+
+    // Try Resend first (for demos)
+    if (process.env.RESEND_API_KEY) {
+      try {
+        this.primaryProvider = new ResendProvider();
+        console.log(`📧 Email Service initialized with primary provider: ${this.primaryProvider.name}`);
+        primaryInitialized = true;
+      } catch (error) {
+        console.warn('⚠️ Failed to initialize Resend provider:', error);
+      }
     }
 
-    // Initialize fallback provider (Amazon SES) - optional
-    try {
-      if (process.env.AWS_SES_ACCESS_KEY_ID && process.env.AWS_SES_SECRET_ACCESS_KEY) {
+    // Try SendGrid if Resend not available
+    if (!primaryInitialized && process.env.SENDGRID_API_KEY) {
+      try {
+        this.primaryProvider = new SendGridProvider();
+        console.log(`📧 Email Service initialized with primary provider: ${this.primaryProvider.name}`);
+        primaryInitialized = true;
+      } catch (error) {
+        console.warn('⚠️ Failed to initialize SendGrid provider:', error);
+      }
+    }
+
+    // Try Amazon SES if neither Resend nor SendGrid available
+    if (!primaryInitialized && process.env.AWS_SES_ACCESS_KEY_ID && process.env.AWS_SES_SECRET_ACCESS_KEY) {
+      try {
+        this.primaryProvider = new AmazonSESProvider();
+        console.log(`📧 Email Service initialized with primary provider: ${this.primaryProvider.name}`);
+        primaryInitialized = true;
+      } catch (error) {
+        console.warn('⚠️ Failed to initialize Amazon SES provider:', error);
+      }
+    }
+
+    // Throw error if no primary provider available
+    if (!primaryInitialized) {
+      throw new Error('Email service initialization failed: No email provider configured (set RESEND_API_KEY, SENDGRID_API_KEY, or AWS_SES credentials)');
+    }
+
+    // Initialize fallback provider (optional) - try providers not already used
+    if (this.primaryProvider.name !== 'Amazon SES' && process.env.AWS_SES_ACCESS_KEY_ID && process.env.AWS_SES_SECRET_ACCESS_KEY) {
+      try {
         this.fallbackProvider = new AmazonSESProvider();
         console.log(`📧 Email Service fallback provider available: ${this.fallbackProvider.name}`);
-      } else {
-        console.log('ℹ️ Amazon SES fallback not configured (optional)');
+      } catch (error) {
+        console.warn('⚠️ Failed to initialize fallback email provider (Amazon SES):', error);
       }
-    } catch (error) {
-      console.warn('⚠️ Failed to initialize fallback email provider (Amazon SES):', error);
-      console.log('ℹ️ Service will continue without fallback (SendGrid only)');
+    } else if (this.primaryProvider.name !== 'SendGrid' && process.env.SENDGRID_API_KEY) {
+      try {
+        this.fallbackProvider = new SendGridProvider();
+        console.log(`📧 Email Service fallback provider available: ${this.fallbackProvider.name}`);
+      } catch (error) {
+        console.warn('⚠️ Failed to initialize fallback email provider (SendGrid):', error);
+      }
+    }
+
+    if (!this.fallbackProvider) {
+      console.log('ℹ️ No fallback email provider configured (optional but recommended for production)');
     }
   }
 

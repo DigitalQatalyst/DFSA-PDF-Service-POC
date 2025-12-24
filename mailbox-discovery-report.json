@@ -1,0 +1,86 @@
+{
+  "timestamp": "2025-12-24T06:20:05.314Z",
+  "domain": "dfsa.ae",
+  "totalCandidates": 11,
+  "accessible": 0,
+  "notAccessible": 11,
+  "candidates": [
+    {
+      "email": "noreply@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "no-reply@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "service@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "dfsa-service@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "pdfservice@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "pdf-service@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "notifications@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "admin@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "system@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "automated@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    },
+    {
+      "email": "app@dfsa.ae",
+      "source": "Common Pattern Guess",
+      "accessible": false,
+      "canSendMail": false,
+      "error": "Mailbox not found"
+    }
+  ]
+}

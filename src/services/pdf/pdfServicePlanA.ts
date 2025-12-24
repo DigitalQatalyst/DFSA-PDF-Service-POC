@@ -103,11 +103,9 @@ export class PDFServicePlanA {
         }
       });
 
-      // PRESERVED: Business logic - DTO to ViewModel mapping (unchanged)
-      const viewModel = PDFServicePlanA.mapDtoToViewModel(dto);
-
-      // PRESERVED: Template rendering with Handlebars (unchanged)
-      const htmlContent = await PDFServicePlanA.renderTemplate(viewModel);
+      // Pass DTO directly to template (matching Plan C approach)
+      // The template uses the canonical DTO structure, not a ViewModel
+      const htmlContent = await PDFServicePlanA.renderTemplate(dto);
 
       // PLAYWRIGHT IMPROVEMENT: Auto-waits for content to be ready
       // No need for manual waitUntil checks - Playwright is smarter
@@ -136,7 +134,7 @@ export class PDFServicePlanA {
         // PRESERVED: DFSA branding - #B82933 red, #E5E5E5 light grey
         footerTemplate: `
           <div style="font-size: 9px; width: 100%; text-align: center; margin: 0 15mm; padding: 5px 0; color: #B82933; border-top: 1px solid #E5E5E5;">
-            <span>Page <span class="pageNumber"></span> of <span class="totalPages"></span> | Generated on ${viewModel.generated_at} | Application ID: ${viewModel.application_id}</span>
+            <span>Page <span class="pageNumber"></span> of <span class="totalPages"></span> | Generated on ${dto.GeneratedAt} | Application ID: ${dto.Application.Id}</span>
           </div>
         `
       });
@@ -207,20 +205,21 @@ export class PDFServicePlanA {
   /**
    * Render Handlebars template
    *
-   * PRESERVED: 100% unchanged
-   * Handlebars template engine already recommended for production
+   * Uses the canonical DTO structure directly (matching Plan C approach)
+   * Template paths map to AuthorisedIndividualDTO fields exactly
    */
-  private static async renderTemplate(viewModel: TemplateViewModel): Promise<string> {
+  private static async renderTemplate(dto: AuthorisedIndividualDTO): Promise<string> {
     try {
-      const templatePath = join(process.cwd(), 'src', 'templates', 'pdf-template.hbs');
+      // Use the full Plan C template with all 71+ dynamic fields
+      const templatePath = join(process.cwd(), 'src', 'templates', 'AuthorisedIndividual', 'authorisedIndividualTemplate.hbs');
       const templateSource = await readFile(templatePath, 'utf-8');
 
       // Register helpers
       PDFServicePlanA.registerHelpers();
 
-      // Compile and render
+      // Compile and render with DTO directly
       const template = handlebars.compile(templateSource);
-      return template(viewModel);
+      return template(dto);
 
     } catch (error) {
       console.error('❌ Template Rendering Error:', error);

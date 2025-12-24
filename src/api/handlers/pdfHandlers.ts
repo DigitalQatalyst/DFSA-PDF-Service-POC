@@ -6,7 +6,7 @@ import dataverseClient from '../../services/dataverse/dataverseClient';
 import { mapToDTO } from '../../mappers/authorisedIndividualMapper';
 import { storePdf } from '../../services/storage/storageService';
 import { PDFServicePlanA } from '../../services/pdf/pdfServicePlanA';
-import { EmailService } from '../../services/email/emailService';
+import { EmailService } from '../../services/email/EmailService';
 
 /**
  * Handler for POST /api/pdf/generate
@@ -393,9 +393,15 @@ export async function generateAndEmailPdfHandler(req: Request, res: Response) {
     console.log(`[Plan A Email] PDF generated: ${pdfBuffer.length} bytes`);
 
     // Step 4: Get applicant email from DTO
-    const applicantEmail = dto.Application.Requestor.Email;
+    let applicantEmail = dto.Application.Requestor.Email;
     const applicantName = dto.Application.AuthorisedIndividualName;
     const requestorEmail = dto.Application.Requestor.Email || 'noreply@dfsa.ae';
+
+    // DEMO MODE: Override recipient email if DEMO_EMAIL_OVERRIDE is set
+    if (process.env.DEMO_EMAIL_OVERRIDE) {
+      console.log(`[DEMO MODE] Overriding recipient email from ${applicantEmail} to ${process.env.DEMO_EMAIL_OVERRIDE}`);
+      applicantEmail = process.env.DEMO_EMAIL_OVERRIDE;
+    }
 
     if (!applicantEmail) {
       return res.status(400).json({

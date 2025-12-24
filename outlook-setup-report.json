@@ -1,0 +1,58 @@
+[
+  {
+    "step": "Environment Variables",
+    "status": "PASS",
+    "message": "Azure AD credentials found in .env",
+    "details": {
+      "AZURE_TENANT_ID": "199ebd0d...",
+      "AZURE_CLIENT_ID": "8f51d2e4...",
+      "AZURE_CLIENT_SECRET": "Set ✓"
+    }
+  },
+  {
+    "step": "Azure AD Authentication",
+    "status": "PASS",
+    "message": "Successfully authenticated with Azure AD",
+    "details": {
+      "tokenObtained": true,
+      "expiresOn": "2025-12-23T13:54:23.000Z"
+    }
+  },
+  {
+    "step": "App Registration Found",
+    "status": "PASS",
+    "message": "Azure AD app registration verified",
+    "details": {
+      "displayName": "DQ_DFSA",
+      "appId": "8f51d2e4-eb48-4ca9-bb27-67845f17a2b3",
+      "servicePrincipalType": "Application"
+    }
+  },
+  {
+    "step": "Mail.Send Permission",
+    "status": "WARNING",
+    "message": "Could not verify Mail.Send permission in app roles",
+    "details": {
+      "hint": "This may need to be granted by Azure AD admin",
+      "nextStep": "Ask IT team to verify Mail.Send permission in Azure Portal"
+    }
+  },
+  {
+    "step": "List Mailboxes",
+    "status": "WARNING",
+    "message": "Could not list users",
+    "details": {
+      "error": "Insufficient privileges to complete the operation.",
+      "hint": "The app needs User.Read.All permission to list users",
+      "workaround": "You can manually specify a user email in GRAPH_EMAIL_USER environment variable"
+    }
+  },
+  {
+    "step": "Email Send Test",
+    "status": "WARNING",
+    "message": "Cannot test email sending - no user email specified",
+    "details": {
+      "solution": "Set GRAPH_EMAIL_USER in .env to a valid user email address"
+    }
+  }
+]
