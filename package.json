@@ -7,7 +7,8 @@
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "dev:api": "ts-node-dev --respawn --transpile-only src/api/server.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node src/index.ts",
+    "start:prod": "NODE_ENV=production node src/index.ts",
     "start:api": "node dist/api/server.js",
     "test": "jest",
     "test:config": "ts-node src/tests/test-config.ts",
@@ -18,7 +19,8 @@
     "test:template": "ts-node src/tests/test-template.ts",
     "validate:all": "npm run test:config && npm run test:dataverse && npm run test:mapper && npm run test:template",
     "lint": "eslint src --ext .ts",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\"",
+    "postinstall": "npx playwright install --with-deps chromium || echo 'Playwright install will run during Azure deployment'"
   },
   "keywords": [
     "dfsa",
